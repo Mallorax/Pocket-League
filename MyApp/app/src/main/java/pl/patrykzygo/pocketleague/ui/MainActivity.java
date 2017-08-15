@@ -1,7 +1,9 @@
-package pl.patrykzygo.pocketleague;
+package pl.patrykzygo.pocketleague.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import pl.patrykzygo.pocketleague.R;
 
 public class MainActivity extends AppCompatActivity {
 
