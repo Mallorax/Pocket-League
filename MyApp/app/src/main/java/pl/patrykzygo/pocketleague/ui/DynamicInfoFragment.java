@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 
 import pl.patrykzygo.pocketleague.R;
 
-/**
- * Created by Mallorax on 15.08.2017.
- */
 
 public class DynamicInfoFragment extends Fragment {
 

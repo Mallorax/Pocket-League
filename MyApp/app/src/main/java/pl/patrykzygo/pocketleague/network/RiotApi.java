@@ -6,9 +6,6 @@ import pl.patrykzygo.pocketleague.app.Constants;
 import retrofit2.http.GET;
 import rx.Observable;
 
-/**
- * Created by Mallorax on 15.08.2017.
- */
 
 public interface RiotApi {
 

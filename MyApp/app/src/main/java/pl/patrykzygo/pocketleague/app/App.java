@@ -7,9 +7,6 @@ import com.squareup.leakcanary.LeakCanary;
 import pl.patrykzygo.pocketleague.dagger.AppComponent;
 import pl.patrykzygo.pocketleague.dagger.DaggerAppComponent;
 
-/**
- * Created by Mallorax on 15.08.2017.
- */
 
 public class App extends Application{
 

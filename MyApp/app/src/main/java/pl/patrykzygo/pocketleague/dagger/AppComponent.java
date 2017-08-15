@@ -4,9 +4,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * Created by Mallorax on 15.08.2017.
- */
 
 @Singleton
 @Component(modules = {

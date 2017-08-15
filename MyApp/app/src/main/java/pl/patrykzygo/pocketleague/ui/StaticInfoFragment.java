@@ -2,17 +2,22 @@ package pl.patrykzygo.pocketleague.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
 
-/**
- * Created by Mallorax on 15.08.2017.
- */
 
 public class StaticInfoFragment extends Fragment {
+
+
+    @BindView(R.id.static_menu_recycler_view)
+    RecyclerView recyclerView;
 
     public StaticInfoFragment() {
         // Required empty public constructor
@@ -26,7 +31,14 @@ public class StaticInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.static_info_fragment, container, false);
+        View view = inflater.inflate(R.layout.static_info_fragment, container, false);
+        ButterKnife.bind(this, view);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new StaticInfoAdapter());
+
+        return view;
     }
+
 }
