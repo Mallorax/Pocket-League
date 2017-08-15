@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="2dp"
+    android:background="@color/windowBackground"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:weightSum="6">
+
+    <TextView
+        android:id="@+id/champions_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/option_list_margin"
+        android:layout_weight="1"
+        android:background="@color/textColorPrimary"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:outlineProvider="background"
+        android:text="Champions"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/items_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/option_list_margin"
+        android:layout_weight="1"
+        android:background="@color/textColorPrimary"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:outlineProvider="background"
+        android:text="Items"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/masteries_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/option_list_margin"
+        android:layout_weight="1"
+        android:background="@color/textColorPrimary"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:outlineProvider="background"
+        android:text="Masteries"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/runes_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/option_list_margin"
+        android:layout_weight="1"
+        android:background="@color/textColorPrimary"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:outlineProvider="background"
+        android:text="Runes"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/summoners_spells_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/option_list_margin"
+        android:layout_weight="1"
+        android:background="@color/textColorPrimary"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:outlineProvider="background"
+        android:text="Summoners spells"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/maps_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/option_list_margin"
+        android:layout_weight="1"
+        android:background="@color/textColorPrimary"
+        android:clickable="true"
+        android:elevation="1dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:outlineProvider="background"
+        android:text="Maps"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+</LinearLayout>
