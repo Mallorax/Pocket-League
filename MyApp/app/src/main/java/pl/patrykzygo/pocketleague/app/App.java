@@ -5,6 +5,7 @@ import android.app.Application;
 import com.squareup.leakcanary.LeakCanary;
 
 import pl.patrykzygo.pocketleague.dagger.AppComponent;
+import pl.patrykzygo.pocketleague.dagger.AppModule;
 import pl.patrykzygo.pocketleague.dagger.DaggerAppComponent;
 
 
@@ -18,6 +19,7 @@ public class App extends Application{
 
     protected AppComponent initDagger(){
         return DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
                 .build();
     }
 

@@ -15,7 +15,11 @@ import pl.patrykzygo.pocketleague.app.Constants;
 public class StaticInfoAdapter extends RecyclerView.Adapter<StaticInfoAdapter.StaticInfoViewHolder> {
 
     private String[] menuPositions = Constants.STATIC_MENU_POSITIONS;
+    private OnMenuPositionClickListener menuPositionClickListener;
 
+    public void setOnMenuPositionClickLiostener(OnMenuPositionClickListener listener){
+        this.menuPositionClickListener = listener;
+    }
 
     @Override
     public StaticInfoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -34,7 +38,12 @@ public class StaticInfoAdapter extends RecyclerView.Adapter<StaticInfoAdapter.St
         return menuPositions.length;
     }
 
-    public static class StaticInfoViewHolder extends RecyclerView.ViewHolder{
+
+    interface OnMenuPositionClickListener{
+        void onMenuPositionClicked(String positionName);
+    }
+
+    public class StaticInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.static_menu_text)
         TextView text;
@@ -42,6 +51,12 @@ public class StaticInfoAdapter extends RecyclerView.Adapter<StaticInfoAdapter.St
         public StaticInfoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            menuPositionClickListener.onMenuPositionClicked(menuPositions[getLayoutPosition()]);
         }
     }
 }
