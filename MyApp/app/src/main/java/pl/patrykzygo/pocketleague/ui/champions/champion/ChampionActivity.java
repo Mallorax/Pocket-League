@@ -1,4 +1,5 @@
-package pl.patrykzygo.pocketleague.ui;
+package pl.patrykzygo.pocketleague.ui.champions.champion;
+
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,8 +10,12 @@ import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
+import pl.patrykzygo.pocketleague.ui.ViewPagerAdapter;
+import pl.patrykzygo.pocketleague.ui.champions.champion.abilities_tab.ChampionAbilitiesTab;
+import pl.patrykzygo.pocketleague.ui.champions.champion.lore_tab.ChampionLoreTab;
+import pl.patrykzygo.pocketleague.ui.champions.champion.overview_tab.ChampionOverviewTab;
 
-public class MainActivity extends AppCompatActivity {
+public class ChampionActivity extends AppCompatActivity{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -34,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new DynamicInfoFragment(), "Dynamic");
-        adapter.addFragment(new StaticInfoFragment(), "Static");
+        adapter.addFragment(new ChampionOverviewTab(), "Overview");
+        adapter.addFragment(new ChampionAbilitiesTab(), "Abilities");
+        adapter.addFragment(new ChampionLoreTab(), "Lore");
+
 
         viewPager.setAdapter(adapter);
     }
-
 }

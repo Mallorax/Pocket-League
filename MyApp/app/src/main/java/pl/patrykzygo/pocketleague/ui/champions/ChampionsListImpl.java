@@ -3,8 +3,8 @@ package pl.patrykzygo.pocketleague.ui.champions;
 
 import javax.inject.Inject;
 
-import pl.patrykzygo.pocketleague.repositories.RiotDataSource;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
+import pl.patrykzygo.pocketleague.repositories.RiotDataRepository;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -13,12 +13,12 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
 
     private ChampionsListView view;
-    private RiotDataSource riotRepository;
+    private RiotRepository riotRepository;
     private CompositeSubscription subscriptions;
 
     @Inject
-    public ChampionsListImpl(RiotRepository riotRepository) {
-        this.riotRepository = riotRepository;
+    public ChampionsListImpl(RiotDataRepository riotDataRepository) {
+        this.riotRepository = riotDataRepository;
         this.subscriptions = new CompositeSubscription();
     }
 
@@ -29,21 +29,17 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
     @Override
     public void showChampions() {
-        view.showLoading();
-        loadChampions();
-        view.hideLoading();
-    }
-
-    private void loadChampions(){
         subscriptions.add(riotRepository.getChampions()
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe((championsList) ->{
-            view.attachChampions(championsList);
-        }, throwable -> {
-            throwable.printStackTrace();
-            view.showErrorMessage("Failed to load the champions");
-        }));
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((championsList) ->{
+                    view.attachChampions(championsList);
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    view.showErrorMessage("Failed to load the champions");
+                }));
     }
-}
 
+}
+//TODO presenterImpl leaks view(activity) instance, have to fix that
+//TODO 2 handle the progress bar
 

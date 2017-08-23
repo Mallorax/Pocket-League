@@ -24,4 +24,5 @@ public class AdapterModule {
     StaticInfoAdapter providesStaticInfoAdapter(){
         return new StaticInfoAdapter();
     }
+
 }

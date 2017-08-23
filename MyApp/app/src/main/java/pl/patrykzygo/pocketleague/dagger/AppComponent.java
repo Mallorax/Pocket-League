@@ -15,8 +15,6 @@ import pl.patrykzygo.pocketleague.ui.champions.ChampionsListActivity;
         PresenterModule.class,
         PicassoModule.class
 })
-
-
 public interface AppComponent {
 
     void inject(ChampionsListActivity target);
