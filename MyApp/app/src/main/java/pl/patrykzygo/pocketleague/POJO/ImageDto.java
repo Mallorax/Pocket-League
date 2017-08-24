@@ -1,16 +1,26 @@
 package pl.patrykzygo.pocketleague.POJO;
 
 
+import android.graphics.Bitmap;
+
 public class ImageDto {
 
     private String full;
     private String group;
     private String sprite;
+    private Bitmap bitmap;
     private int h;
     private int w;
     private int y;
     private int x;
 
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
 
     public String getFull() {
         return full;

@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui;
+package pl.patrykzygo.pocketleague.ui.Fragments.static_info;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,10 +17,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
-import pl.patrykzygo.pocketleague.ui.champions.ChampionsListActivity;
+import pl.patrykzygo.pocketleague.ui.adapters.StaticInfoAdapter;
+import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListActivity;
 
 
-public class StaticInfoFragment extends Fragment implements StaticInfoAdapter.OnMenuPositionClickListener{
+public class StaticInfoFragment extends Fragment implements StaticInfoAdapter.OnMenuPositionClickListener {
 
 
     @BindView(R.id.static_menu_recycler_view)

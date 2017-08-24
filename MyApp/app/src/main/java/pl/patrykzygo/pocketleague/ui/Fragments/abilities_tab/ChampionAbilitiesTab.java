@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.champions.champion.abilities_tab;
+package pl.patrykzygo.pocketleague.ui.Fragments.abilities_tab;
 
 
 import android.support.v4.app.Fragment;

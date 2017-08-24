@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.champions.champion.lore_tab;
+package pl.patrykzygo.pocketleague.ui.Fragments.lore_tab;
 
 
 import android.support.v4.app.Fragment;

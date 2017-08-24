@@ -10,6 +10,6 @@ public interface RiotRepository {
 
     Observable<List<ChampionDto>> getChampions();
 
-    ChampionDto getChampion(int id);
+    Observable<ChampionDto> getChampionById(int id);
 
 }

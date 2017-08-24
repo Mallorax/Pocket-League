@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui;
+package pl.patrykzygo.pocketleague.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +39,7 @@ public class StaticInfoAdapter extends RecyclerView.Adapter<StaticInfoAdapter.St
     }
 
 
-    interface OnMenuPositionClickListener{
+    public interface OnMenuPositionClickListener{
         void onMenuPositionClicked(String positionName);
     }
 

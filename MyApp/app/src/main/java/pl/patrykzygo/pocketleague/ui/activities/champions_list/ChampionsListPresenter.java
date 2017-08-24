@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.champions;
+package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 
 public interface ChampionsListPresenter {

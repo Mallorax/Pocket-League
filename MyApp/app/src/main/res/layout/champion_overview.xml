@@ -7,17 +7,17 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="pl.patrykzygo.pocketleague.ui.champions.champion.overview_tab.ChampionMainFragment"/>
+        android:name="pl.patrykzygo.pocketleague.ui.Fragments.main_info_fragment.ChampionMainFragment"/>
 
 
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="pl.patrykzygo.pocketleague.ui.champions.champion.overview_tab.ChampionInfoFragment"/>
+        android:name="pl.patrykzygo.pocketleague.ui.Fragments.overview_tab.ChampionInfoFragment"/>
 
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="pl.patrykzygo.pocketleague.ui.champions.champion.overview_tab.ChampionEnemyTipsFragment"/>
+        android:name="pl.patrykzygo.pocketleague.ui.Fragments.overview_tab.ChampionEnemyTipsFragment"/>
 
 </LinearLayout>

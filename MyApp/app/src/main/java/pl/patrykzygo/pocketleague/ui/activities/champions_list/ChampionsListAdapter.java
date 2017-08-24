@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.champions;
+package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 
 import android.net.Uri;
@@ -24,6 +24,11 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
     private List<ChampionDto> champions;
     private Picasso picasso;
+    private OnChampionClickListener onChampionClickListener;
+
+    public void setOnChampionClickListener(OnChampionClickListener championClickListener){
+        this.onChampionClickListener = onChampionClickListener;
+    }
 
     @Inject
     public ChampionsListAdapter(Picasso picasso) {
@@ -56,7 +61,11 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
         return champions.size();
     }
 
-    public static class ChampionsViewHolder extends RecyclerView.ViewHolder{
+    interface OnChampionClickListener {
+        void onChampionClick(ChampionDto champion);
+    }
+
+    public class ChampionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
         private TextView nameView;
@@ -68,6 +77,12 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
             nameView = (TextView) itemView.findViewById(R.id.champion_name_text_view);
             titleView = (TextView) itemView.findViewById(R.id.champion_title_text_view);
             imageView = (ImageView) itemView.findViewById(R.id.champion_list_icon);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onChampionClickListener.onChampionClick(champions.get(getItemCount()));
         }
     }
 }

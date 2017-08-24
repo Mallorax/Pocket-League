@@ -1,5 +1,6 @@
-package pl.patrykzygo.pocketleague.ui.champions;
+package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,9 +16,10 @@ import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.POJO.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
+import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionActivity;
 
 
-public class ChampionsListActivity extends AppCompatActivity implements ChampionsListView {
+public class ChampionsListActivity extends AppCompatActivity implements ChampionsListView, ChampionsListAdapter.OnChampionClickListener {
 
     @Inject
     ChampionsListPresenter presenter;
@@ -56,4 +58,12 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onChampionClick(ChampionDto champion) {
+        Intent i = new Intent(this, ChampionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", champion.getId());
+        i.putExtra("bundle", bundle);
+        startActivity(i);
+    }
 }

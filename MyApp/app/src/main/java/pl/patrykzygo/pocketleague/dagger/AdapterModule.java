@@ -7,8 +7,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.patrykzygo.pocketleague.ui.StaticInfoAdapter;
-import pl.patrykzygo.pocketleague.ui.champions.ChampionsListAdapter;
+import pl.patrykzygo.pocketleague.ui.adapters.StaticInfoAdapter;
+import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListAdapter;
 
 @Module
 public class AdapterModule {

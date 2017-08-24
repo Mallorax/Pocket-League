@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.champions;
+package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 
 import java.util.List;

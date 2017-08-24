@@ -1,10 +1,9 @@
-package pl.patrykzygo.pocketleague.ui.champions;
+package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 
 import javax.inject.Inject;
 
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
-import pl.patrykzygo.pocketleague.repositories.RiotDataRepository;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -17,7 +16,7 @@ public class ChampionsListImpl implements ChampionsListPresenter {
     private CompositeSubscription subscriptions;
 
     @Inject
-    public ChampionsListImpl(RiotDataRepository riotDataRepository) {
+    public ChampionsListImpl(RiotRepository riotDataRepository) {
         this.riotRepository = riotDataRepository;
         this.subscriptions = new CompositeSubscription();
     }

@@ -1,8 +1,7 @@
-package pl.patrykzygo.pocketleague.ui.champions.champion.overview_tab;
+package pl.patrykzygo.pocketleague.ui.Fragments.main_info_fragment;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,8 +18,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.POJO.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
+import pl.patrykzygo.pocketleague.app.App;
 
-public class ChampionMainFragment extends Fragment implements OverView {
+public class ChampionMainFragment extends Fragment implements ChampionMainFragmentView {
 
     @BindView(R.id.champion_list_icon)
     ImageView championIcon;
@@ -30,7 +30,15 @@ public class ChampionMainFragment extends Fragment implements OverView {
     TextView championTitle;
 
     @Inject
-    OverviewPresenter presenter;
+    ChampionMainFragmentPresenter presenter;
+
+    private static  ChampionMainFragment newInstance(int id){
+        ChampionMainFragment fragment = new ChampionMainFragment();
+        Bundle b = new Bundle();
+        b.putInt("id", id);
+        fragment.setArguments(b);
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,12 +55,13 @@ public class ChampionMainFragment extends Fragment implements OverView {
 
     @Override
     public void onAttach(Context context) {
+        ((App) getActivity().getApplication()).getAppComponent().inject(this);
         super.onAttach(context);
     }
 
     @Override
-    public void showInfo(ChampionDto champion, Bitmap image) {
-        championIcon.setImageBitmap(image);
+    public void showInfo(ChampionDto champion) {
+        championIcon.setImageBitmap(champion.getImage().getBitmap());
         championName.setText(champion.getName());
         championTitle.setText(champion.getTitle());
     }
