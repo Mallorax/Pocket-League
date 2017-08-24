@@ -3,9 +3,9 @@ package pl.patrykzygo.pocketleague.dagger;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import pl.patrykzygo.pocketleague.ui.Fragments.static_info.StaticInfoFragment;
+import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionActivity;
 import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListActivity;
-import pl.patrykzygo.pocketleague.ui.Fragments.main_info_fragment.ChampionMainFragment;
+import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.static_info.StaticInfoFragment;
 
 
 @Singleton
@@ -20,7 +20,8 @@ import pl.patrykzygo.pocketleague.ui.Fragments.main_info_fragment.ChampionMainFr
 public interface AppComponent {
 
     void inject(ChampionsListActivity target);
+    void inject(ChampionActivity target);
     void inject(StaticInfoFragment target);
-    void inject(ChampionMainFragment target);
+
 
 }

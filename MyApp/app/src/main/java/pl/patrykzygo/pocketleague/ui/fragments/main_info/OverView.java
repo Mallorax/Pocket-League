@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.Fragments.main_info_fragment;
+package pl.patrykzygo.pocketleague.ui.fragments.main_info;
 
 
 import android.content.Context;
@@ -10,17 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.POJO.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
-import pl.patrykzygo.pocketleague.app.App;
 
-public class ChampionMainFragment extends Fragment implements ChampionMainFragmentView {
+public class OverView extends Fragment{
 
     @BindView(R.id.champion_list_icon)
     ImageView championIcon;
@@ -29,11 +24,9 @@ public class ChampionMainFragment extends Fragment implements ChampionMainFragme
     @BindView(R.id.champion_title_text_view)
     TextView championTitle;
 
-    @Inject
-    ChampionMainFragmentPresenter presenter;
 
-    private static  ChampionMainFragment newInstance(int id){
-        ChampionMainFragment fragment = new ChampionMainFragment();
+    private static OverView newInstance(int id){
+        OverView fragment = new OverView();
         Bundle b = new Bundle();
         b.putInt("id", id);
         fragment.setArguments(b);
@@ -55,19 +48,7 @@ public class ChampionMainFragment extends Fragment implements ChampionMainFragme
 
     @Override
     public void onAttach(Context context) {
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
         super.onAttach(context);
     }
 
-    @Override
-    public void showInfo(ChampionDto champion) {
-        championIcon.setImageBitmap(champion.getImage().getBitmap());
-        championName.setText(champion.getName());
-        championTitle.setText(champion.getTitle());
-    }
-
-    @Override
-    public void showErrorMessage(String errorMessage) {
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
-    }
 }

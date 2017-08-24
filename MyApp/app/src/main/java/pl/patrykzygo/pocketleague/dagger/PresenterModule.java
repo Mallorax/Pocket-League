@@ -5,10 +5,10 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
+import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionPresenter;
+import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionPresenterImpl;
 import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListImpl;
 import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListPresenter;
-import pl.patrykzygo.pocketleague.ui.Fragments.main_info_fragment.ChampionMainFragmentImpl;
-import pl.patrykzygo.pocketleague.ui.Fragments.main_info_fragment.ChampionMainFragmentPresenter;
 
 @Module
 public class PresenterModule {
@@ -21,7 +21,7 @@ public class PresenterModule {
 
     @Provides
     @Singleton
-    ChampionMainFragmentPresenter providesChampionMainFragmentPresenter(RiotRepository repository){
-        return new ChampionMainFragmentImpl(repository);
+    ChampionPresenter providesChampionPresenter(RiotRepository repository){
+        return new ChampionPresenterImpl(repository);
     }
 }

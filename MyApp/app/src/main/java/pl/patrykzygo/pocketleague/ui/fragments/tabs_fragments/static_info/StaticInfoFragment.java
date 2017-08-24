@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.Fragments.static_info;
+package pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.static_info;
 
 import android.content.Context;
 import android.content.Intent;

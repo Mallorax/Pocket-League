@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.Fragments.dynamic_info;
+package pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.dynamic_info;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

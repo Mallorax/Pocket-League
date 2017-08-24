@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.Fragments.overview_tab;
+package pl.patrykzygo.pocketleague.ui.fragments.enemy_tips;
 
 
 import android.support.v4.app.Fragment;
