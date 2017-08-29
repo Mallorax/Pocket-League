@@ -24,7 +24,7 @@ public class ChampionOverviewTab extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.champions_list_item, container, false);
+        View view = inflater.inflate(R.layout.champion_overview, container, false);
         ButterKnife.bind(this, view);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -37,3 +37,5 @@ public class ChampionOverviewTab extends Fragment{
 
 
 }
+
+//TODO add main info, info, and tips fragments here

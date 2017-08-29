@@ -11,6 +11,7 @@ public class ChampionDto {
     private ImageDto image;
     private InfoDto info;
     private StatsDto stats;
+    private List<String> enemyTips;
     private List<String> tags;
     private String partyType;
     private List<SkinDto> skins;
@@ -22,6 +23,14 @@ public class ChampionDto {
     private int id;
     private String blurb;
     private List<ChampionSpellDto> spells;
+
+    public List<String> getEnemyTips() {
+        return enemyTips;
+    }
+
+    public void setEnemyTips(List<String> enemyTips) {
+        this.enemyTips = enemyTips;
+    }
 
     public InfoDto getInfo() {
         return info;

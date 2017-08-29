@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:columnOrderPreserved="true"
+    android:useDefaultMargins="true"
+    android:alignmentMode="alignMargins">
+
+    <TextView
+        android:id="@+id/champion_health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health: " />
+
+    <TextView
+        android:id="@+id/champion_mana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mana: " />
+
+    <TextView
+        android:id="@+id/champion_health_regen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health regen: " />
+    <TextView
+        android:id="@+id/champion_mana_regen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mana regen: " />
+
+    <TextView
+        android:id="@+id/champion_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attack Damage: " />
+
+    <TextView
+        android:id="@+id/champion_ar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attack Range: " />
+
+    <TextView
+        android:id="@+id/champion_armor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Armor: " />
+
+    <TextView
+        android:id="@+id/champion_mr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Magic Resistance: " />
+
+    <TextView
+        android:id="@+id/champion_as"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attack Speed: " />
+
+    <TextView
+        android:id="@+id/champion_ms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Movement Speed: " />
+</GridLayout>

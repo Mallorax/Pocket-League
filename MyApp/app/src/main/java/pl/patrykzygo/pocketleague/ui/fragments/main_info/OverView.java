@@ -3,6 +3,7 @@ package pl.patrykzygo.pocketleague.ui.fragments.main_info;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.patrykzygo.pocketleague.POJO.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
 
 public class OverView extends Fragment{
@@ -24,13 +26,17 @@ public class OverView extends Fragment{
     @BindView(R.id.champion_title_text_view)
     TextView championTitle;
 
+    private ChampionDto champion;
 
-    private static OverView newInstance(int id){
+
+    private static OverView newInstance(@NonNull ChampionDto champion){
         OverView fragment = new OverView();
-        Bundle b = new Bundle();
-        b.putInt("id", id);
-        fragment.setArguments(b);
+        fragment.setChampion(champion);
         return fragment;
+    }
+
+    public void setChampion(ChampionDto champion){
+        this.champion = champion;
     }
 
     @Override
@@ -49,6 +55,13 @@ public class OverView extends Fragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        attachInfo();
+    }
+
+    private void attachInfo(){
+        championIcon.setImageBitmap(champion.getImage().getBitmap());
+        championName.setText(champion.getName());
+        championTitle.setText(champion.getTitle());
     }
 
 }
