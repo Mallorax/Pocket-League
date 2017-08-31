@@ -27,7 +27,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     private OnChampionClickListener onChampionClickListener;
 
     public void setOnChampionClickListener(OnChampionClickListener championClickListener){
-        this.onChampionClickListener = onChampionClickListener;
+        this.onChampionClickListener = championClickListener;
     }
 
     @Inject
@@ -82,7 +82,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
         @Override
         public void onClick(View v) {
-            onChampionClickListener.onChampionClick(champions.get(getItemCount()));
+            onChampionClickListener.onChampionClick(champions.get(getLayoutPosition()));
         }
     }
 }

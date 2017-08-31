@@ -43,7 +43,7 @@ public class RiotDataRepository implements RiotRepository {
 
     @Override
     public Observable<ChampionDto> getChampionById(int id) {
-        return riotApi.getChampionById(id)
+        return riotApi.getChampionById(Integer.toString(id))
                 .subscribeOn(Schedulers.io())
                 .flatMap(championDto -> {
                     try {

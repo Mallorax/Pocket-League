@@ -4,65 +4,65 @@ package pl.patrykzygo.pocketleague.POJO;
 
 public class StatsDto {
 
-    private double armorPerLevel;
-    private double hpPerLevel;
-    private double attackDamage;
-    private double mpPerLevel;
-    private double attackSpeedOffset;
+    private double armorperlevel;
+    private double hpperlevel;
+    private double attackdamage;
+    private double mpperlevel;
+    private double attackspeedoffset;
     private double armor;
     private double hp;
-    private double hpRegenPerLevel;
-    private double spellBlock;
-    private double attackRange;
-    private double moveSpeed;
-    private double attackDamagePerLevel;
-    private double mpRegenPerLevel;
+    private double hpregenperlevel;
+    private double spellblock;
+    private double attackrange;
+    private double movespeed;
+    private double attackdamageperlevel;
+    private double mpregenperlevel;
     private double mp;
-    private double spellBlockPerLevel;
+    private double spellblockperlevel;
     private double crit;
-    private double mpRegen;
-    private double attackSpeedPerLevel;
-    private double hpRegen;
-    private double critPerLevel;
+    private double mpregen;
+    private double attackspeedperlevel;
+    private double hpregen;
+    private double critperlevel;
 
-    public double getArmorPerLevel() {
-        return armorPerLevel;
+    public double getArmorperlevel() {
+        return armorperlevel;
     }
 
-    public void setArmorPerLevel(double armorPerLevel) {
-        this.armorPerLevel = armorPerLevel;
+    public void setArmorperlevel(double armorperlevel) {
+        this.armorperlevel = armorperlevel;
     }
 
-    public double getHpPerLevel() {
-        return hpPerLevel;
+    public double getHpperlevel() {
+        return hpperlevel;
     }
 
-    public void setHpPerLevel(double hpPerLevel) {
-        this.hpPerLevel = hpPerLevel;
+    public void setHpperlevel(double hpperlevel) {
+        this.hpperlevel = hpperlevel;
     }
 
-    public double getAttackDamage() {
-        return attackDamage;
+    public double getAttackdamage() {
+        return attackdamage;
     }
 
-    public void setAttackDamage(double attackDamage) {
-        this.attackDamage = attackDamage;
+    public void setAttackdamage(double attackdamage) {
+        this.attackdamage = attackdamage;
     }
 
-    public double getMpPerLevel() {
-        return mpPerLevel;
+    public double getMpperlevel() {
+        return mpperlevel;
     }
 
-    public void setMpPerLevel(double mpPerLevel) {
-        this.mpPerLevel = mpPerLevel;
+    public void setMpperlevel(double mpperlevel) {
+        this.mpperlevel = mpperlevel;
     }
 
-    public double getAttackSpeedOffset() {
-        return attackSpeedOffset;
+    public double getAttackspeedoffset() {
+        return attackspeedoffset;
     }
 
-    public void setAttackSpeedOffset(double attackSpeedOffset) {
-        this.attackSpeedOffset = attackSpeedOffset;
+    public void setAttackspeedoffset(double attackspeedoffset) {
+        this.attackspeedoffset = attackspeedoffset;
     }
 
     public double getArmor() {
@@ -81,52 +81,52 @@ public class StatsDto {
         this.hp = hp;
     }
 
-    public double getHpRegenPerLevel() {
-        return hpRegenPerLevel;
+    public double getHpregenperlevel() {
+        return hpregenperlevel;
     }
 
-    public void setHpRegenPerLevel(double hpRegenPerLevel) {
-        this.hpRegenPerLevel = hpRegenPerLevel;
+    public void setHpregenperlevel(double hpregenperlevel) {
+        this.hpregenperlevel = hpregenperlevel;
     }
 
-    public double getSpellBlock() {
-        return spellBlock;
+    public double getSpellblock() {
+        return spellblock;
     }
 
-    public void setSpellBlock(double spellBlock) {
-        this.spellBlock = spellBlock;
+    public void setSpellblock(double spellblock) {
+        this.spellblock = spellblock;
     }
 
-    public double getAttackRange() {
-        return attackRange;
+    public double getAttackrange() {
+        return attackrange;
     }
 
-    public void setAttackRange(double attackRange) {
-        this.attackRange = attackRange;
+    public void setAttackrange(double attackrange) {
+        this.attackrange = attackrange;
     }
 
-    public double getMoveSpeed() {
-        return moveSpeed;
+    public double getMovespeed() {
+        return movespeed;
     }
 
-    public void setMoveSpeed(double moveSpeed) {
-        this.moveSpeed = moveSpeed;
+    public void setMovespeed(double movespeed) {
+        this.movespeed = movespeed;
     }
 
-    public double getAttackDamagePerLevel() {
-        return attackDamagePerLevel;
+    public double getAttackdamageperlevel() {
+        return attackdamageperlevel;
     }
 
-    public void setAttackDamagePerLevel(double attackDamagePerLevel) {
-        this.attackDamagePerLevel = attackDamagePerLevel;
+    public void setAttackdamageperlevel(double attackdamageperlevel) {
+        this.attackdamageperlevel = attackdamageperlevel;
     }
 
-    public double getMpRegenPerLevel() {
-        return mpRegenPerLevel;
+    public double getMpregenperlevel() {
+        return mpregenperlevel;
     }
 
-    public void setMpRegenPerLevel(double mpRegenPerLevel) {
-        this.mpRegenPerLevel = mpRegenPerLevel;
+    public void setMpregenperlevel(double mpregenperlevel) {
+        this.mpregenperlevel = mpregenperlevel;
     }
 
     public double getMp() {
@@ -137,12 +137,12 @@ public class StatsDto {
         this.mp = mp;
     }
 
-    public double getSpellBlockPerLevel() {
-        return spellBlockPerLevel;
+    public double getSpellblockperlevel() {
+        return spellblockperlevel;
     }
 
-    public void setSpellBlockPerLevel(double spellBlockPerLevel) {
-        this.spellBlockPerLevel = spellBlockPerLevel;
+    public void setSpellblockperlevel(double spellblockperlevel) {
+        this.spellblockperlevel = spellblockperlevel;
     }
 
     public double getCrit() {
@@ -153,35 +153,35 @@ public class StatsDto {
         this.crit = crit;
     }
 
-    public double getMpRegen() {
-        return mpRegen;
+    public double getMpregen() {
+        return mpregen;
     }
 
-    public void setMpRegen(double mpRegen) {
-        this.mpRegen = mpRegen;
+    public void setMpregen(double mpregen) {
+        this.mpregen = mpregen;
     }
 
-    public double getAttackSpeedPerLevel() {
-        return attackSpeedPerLevel;
+    public double getAttackspeedperlevel() {
+        return attackspeedperlevel;
     }
 
-    public void setAttackSpeedPerLevel(double attackSpeedPerLevel) {
-        this.attackSpeedPerLevel = attackSpeedPerLevel;
+    public void setAttackspeedperlevel(double attackspeedperlevel) {
+        this.attackspeedperlevel = attackspeedperlevel;
     }
 
-    public double getHpRegen() {
-        return hpRegen;
+    public double getHpregen() {
+        return hpregen;
     }
 
-    public void setHpRegen(double hpRegen) {
-        this.hpRegen = hpRegen;
+    public void setHpregen(double hpregen) {
+        this.hpregen = hpregen;
     }
 
-    public double getCritPerLevel() {
-        return critPerLevel;
+    public double getCritperlevel() {
+        return critperlevel;
     }
 
-    public void setCritPerLevel(double critPerLevel) {
-        this.critPerLevel = critPerLevel;
+    public void setCritperlevel(double critperlevel) {
+        this.critperlevel = critperlevel;
     }
 }

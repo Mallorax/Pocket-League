@@ -48,11 +48,9 @@ public class ChampionInfoFragment extends Fragment {
     @BindView(R.id.champion_ms)
     TextView championMs;
 
-    private static final String CHAMPION_KEY = "champion_key";
-
     private ChampionDto champion;
 
-    private static ChampionInfoFragment newInstance(@NonNull ChampionDto champion){
+    public static ChampionInfoFragment newInstance(@NonNull ChampionDto champion){
         ChampionInfoFragment fragment = new ChampionInfoFragment();
         fragment.setChampion(champion);
         return fragment;
@@ -72,25 +70,25 @@ public class ChampionInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.champion_stats_fragment, container, false);
         ButterKnife.bind(this, view);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        attachInfo();
+        return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        attachInfo();
     }
 
     private void attachInfo(){
-        championHealth.append(Double.toString(champion.getStats().getHp()) + " (+" + Double.toString(champion.getStats().getHpPerLevel()) + " per level");
-        championMana.append(Double.toString(champion.getStats().getMp()) + " (+" + Double.toString(champion.getStats().getMpPerLevel()) + " per level");
-        championHealthRegen.append(Double.toString(champion.getStats().getHpRegen()) + " (+" + Double.toString(champion.getStats().getHpRegenPerLevel()) + " per level");
-        championManaRegen.append(Double.toString(champion.getStats().getMpRegen()) + " (+" + Double.toString(champion.getStats().getMpRegenPerLevel()) + " per level");
-        championAd.append(Double.toString(champion.getStats().getAttackDamage()) + " (+" + Double.toString(champion.getStats().getAttackDamagePerLevel()) + " per level");
-        championAr.append(Double.toString(champion.getStats().getAttackRange()));
-        championArmor.append(Double.toString(champion.getStats().getArmor()) + " (+" + Double.toString(champion.getStats().getArmorPerLevel()) + " per level");
-        championMr.append(Double.toString(champion.getStats().getSpellBlock()) + " (+" + Double.toString(champion.getStats().getSpellBlockPerLevel()) + " per level");
-        championAs.append(Double.toString(champion.getStats().getAttackSpeedOffset()) + " (+" + Double.toString(champion.getStats().getAttackSpeedPerLevel()) + " per level");
-        championHealth.append(Double.toString(champion.getStats().getMoveSpeed()));
+        championHealth.append(Double.toString(champion.getStats().getHp()) + " (+" + Double.toString(champion.getStats().getHpperlevel()) + " per level)");
+        championMana.append(Double.toString(champion.getStats().getMp()) + " (+" + Double.toString(champion.getStats().getMpperlevel()) + " per level)");
+        championHealthRegen.append(Double.toString(champion.getStats().getHpregen()) + " (+" + Double.toString(champion.getStats().getHpregenperlevel()) + " per level)");
+        championManaRegen.append(Double.toString(champion.getStats().getMpregen()) + " (+" + Double.toString(champion.getStats().getMpregenperlevel()) + " per level)");
+        championAd.append(Double.toString(champion.getStats().getAttackdamage()) + " (+" + Double.toString(champion.getStats().getAttackdamageperlevel()) + " per level)");
+        championAr.append(Double.toString(champion.getStats().getAttackrange()));
+        championArmor.append(Double.toString(champion.getStats().getArmor()) + " (+" + Double.toString(champion.getStats().getArmorperlevel()) + " per level)");
+        championMr.append(Double.toString(champion.getStats().getSpellblock()) + " (+" + Double.toString(champion.getStats().getSpellblockperlevel()) + " per level)");
+        championAs.append(Double.toString(champion.getStats().getAttackspeedoffset()) + " (+" + Double.toString(champion.getStats().getAttackspeedperlevel()) + "% per level)"); //TODO attack speed offset is not attack speed value, need to insert it to specific formula in order to get attack speed
+        championMs.append(Double.toString(champion.getStats().getMovespeed()));
     }
 }

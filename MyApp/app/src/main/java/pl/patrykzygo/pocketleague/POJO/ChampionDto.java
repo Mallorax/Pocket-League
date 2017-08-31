@@ -6,31 +6,23 @@ import java.util.List;
 public class ChampionDto {
 
 
+    private InfoDto info;
+    private List<String> enemytips;
+    private StatsDto stats;
     private String name;
     private String title;
     private ImageDto image;
-    private InfoDto info;
-    private StatsDto stats;
-    private List<String> enemyTips;
     private List<String> tags;
-    private String partyType;
+    private String partytype;
     private List<SkinDto> skins;
     private PassiveDto passive;
     private List<RecommendedDto> recommended;
-    private List<String> allyTips;
+    private List<String> allytips;
     private String key;
     private String lore;
     private int id;
     private String blurb;
     private List<ChampionSpellDto> spells;
-
-    public List<String> getEnemyTips() {
-        return enemyTips;
-    }
-
-    public void setEnemyTips(List<String> enemyTips) {
-        this.enemyTips = enemyTips;
-    }
 
     public InfoDto getInfo() {
         return info;
@@ -38,6 +30,14 @@ public class ChampionDto {
 
     public void setInfo(InfoDto info) {
         this.info = info;
+    }
+
+    public List<String> getEnemytips() {
+        return enemytips;
+    }
+
+    public void setEnemytips(List<String> enemytips) {
+        this.enemytips = enemytips;
     }
 
     public StatsDto getStats() {
@@ -48,6 +48,30 @@ public class ChampionDto {
         this.stats = stats;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ImageDto getImage() {
+        return image;
+    }
+
+    public void setImage(ImageDto image) {
+        this.image = image;
+    }
+
     public List<String> getTags() {
         return tags;
     }
@@ -56,12 +80,12 @@ public class ChampionDto {
         this.tags = tags;
     }
 
-    public String getPartyType() {
-        return partyType;
+    public String getPartytype() {
+        return partytype;
     }
 
-    public void setPartyType(String partyType) {
-        this.partyType = partyType;
+    public void setPartytype(String partytype) {
+        this.partytype = partytype;
     }
 
     public List<SkinDto> getSkins() {
@@ -88,12 +112,12 @@ public class ChampionDto {
         this.recommended = recommended;
     }
 
-    public List<String> getAllyTips() {
-        return allyTips;
+    public List<String> getAllytips() {
+        return allytips;
     }
 
-    public void setAllyTips(List<String> allyTips) {
-        this.allyTips = allyTips;
+    public void setAllytips(List<String> allytips) {
+        this.allytips = allytips;
     }
 
     public String getKey() {
@@ -134,29 +158,5 @@ public class ChampionDto {
 
     public void setSpells(List<ChampionSpellDto> spells) {
         this.spells = spells;
-    }
-
-    public ImageDto getImage() {
-        return image;
-    }
-
-    public void setImage(ImageDto image) {
-        this.image = image;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

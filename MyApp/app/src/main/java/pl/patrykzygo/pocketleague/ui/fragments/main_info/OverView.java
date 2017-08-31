@@ -29,7 +29,7 @@ public class OverView extends Fragment{
     private ChampionDto champion;
 
 
-    private static OverView newInstance(@NonNull ChampionDto champion){
+    public static OverView newInstance(@NonNull ChampionDto champion){
         OverView fragment = new OverView();
         fragment.setChampion(champion);
         return fragment;
@@ -49,13 +49,13 @@ public class OverView extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.champions_list_item, container, false);
         ButterKnife.bind(this, view);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        attachInfo();
+        return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        attachInfo();
     }
 
     private void attachInfo(){

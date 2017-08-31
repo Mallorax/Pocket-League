@@ -13,7 +13,7 @@ public class ChampionSpellDto {
     private ImageDto image;
     private String sanitizedDescription;
     private String sanitizedTooltip;
-    private List<Double> effect;
+    private List<List<Double>> effect;
     private String toolTip;
     private int maxRank;
     private String costBurn;
@@ -26,6 +26,22 @@ public class ChampionSpellDto {
     private List<String> effectBurn;
     private List<ImageDto> altImages;
     private String name;
+
+    public List<SpellVarsDto> getVars() {
+        return vars;
+    }
+
+    public void setVars(List<SpellVarsDto> vars) {
+        this.vars = vars;
+    }
+
+    public List<List<Double>> getEffect() {
+        return effect;
+    }
+
+    public void setEffect(List<List<Double>> effect) {
+        this.effect = effect;
+    }
 
     public String getCooldownBurn() {
         return cooldownBurn;
@@ -81,14 +97,6 @@ public class ChampionSpellDto {
 
     public void setSanitizedTooltip(String sanitizedTooltip) {
         this.sanitizedTooltip = sanitizedTooltip;
-    }
-
-    public List<Double> getEffect() {
-        return effect;
-    }
-
-    public void setEffect(List<Double> effect) {
-        this.effect = effect;
     }
 
     public String getToolTip() {

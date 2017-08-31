@@ -3,6 +3,7 @@ package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -49,7 +50,9 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @Override
     public void attachChampions(List<ChampionDto> champions) {
         adapter.setChampions(champions);
+        adapter.setOnChampionClickListener(this);
         championsRecyclerView.setAdapter(adapter);
+        championsRecyclerView.addItemDecoration(new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
         championsRecyclerView.getAdapter().notifyDataSetChanged();
     }
 

@@ -1,67 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="3dp"
     android:columnCount="2"
     android:columnOrderPreserved="true"
     android:useDefaultMargins="true"
     android:alignmentMode="alignMargins">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="26dp"
+        android:text="Champion statistics:" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dividerColor" />
+
+    <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_health"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Health: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_mana"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mana: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_health_regen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Health regen: " />
+
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_mana_regen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mana regen: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_ad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attack Damage: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_ar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attack Range: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_armor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Armor: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_mr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Magic Resistance: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_as"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attack Speed: " />
 
     <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:id="@+id/champion_ms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

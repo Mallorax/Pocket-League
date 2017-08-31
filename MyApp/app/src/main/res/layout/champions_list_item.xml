@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="@color/textColorPrimary"
     android:gravity="center_horizontal"
     android:clipToPadding="false"
-    android:elevation="1dp"
     android:orientation="horizontal"
     android:outlineProvider="background"
     android:padding="3dp">
