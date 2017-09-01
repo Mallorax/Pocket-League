@@ -9,17 +9,7 @@
     android:useDefaultMargins="true"
     android:alignmentMode="alignMargins">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="26dp"
-        android:text="Champion statistics:" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/dividerColor" />
 
     <TextView
         android:gravity="fill_vertical"

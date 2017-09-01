@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/champion_overview_recycler"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -8,25 +9,26 @@
     android:orientation="vertical"
     android:scrollbars="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="26dp"
-        android:text="Champion's lore" />
+        android:text="Champion's abilities" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/dividerColor" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/dividerColor" />
 
     <FrameLayout
-        android:id="@+id/lore_fragment"
+        android:id="@+id/abilities_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

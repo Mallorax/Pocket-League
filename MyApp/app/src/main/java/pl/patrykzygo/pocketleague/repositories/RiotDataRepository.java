@@ -13,6 +13,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.patrykzygo.pocketleague.POJO.ChampionDto;
+import pl.patrykzygo.pocketleague.POJO.ChampionSpellDto;
 import pl.patrykzygo.pocketleague.app.Constants;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import rx.Observable;
@@ -48,6 +49,11 @@ public class RiotDataRepository implements RiotRepository {
                 .flatMap(championDto -> {
                     try {
                         championDto.getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/champion/"+championDto.getImage().getFull())).get());
+                        championDto.getPassive().getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/passive/" +championDto.getPassive().getImage().getFull())).get());
+                        List<ChampionSpellDto> spellDtos = championDto.getSpells();
+                        for (ChampionSpellDto spell : spellDtos){
+                            spell.getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/spell/" +spell.getImage().getFull())).get());
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
