@@ -23,6 +23,7 @@ public class ChampionOverviewTab extends Fragment{
 
     private ChampionDto champion;
 
+
     public static ChampionOverviewTab newInstance(@NonNull ChampionDto champion){
         ChampionOverviewTab fragment = new ChampionOverviewTab();
         fragment.setChampion(champion);
@@ -41,7 +42,7 @@ public class ChampionOverviewTab extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.champion_overview, container, false);
+        View view = inflater.inflate(R.layout.champion_overview_tab, container, false);
         ButterKnife.bind(this, view);
         attachFragments();
         return view;
@@ -53,7 +54,7 @@ public class ChampionOverviewTab extends Fragment{
     }
 
     private void attachFragments(){
-        FragmentManager manager = getFragmentManager();
+        FragmentManager manager = getChildFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.overview_first_fragment, OverView.newInstance(champion));
         transaction.replace(R.id.overview_second_fragment, ChampionInfoFragment.newInstance(champion));
@@ -62,5 +63,3 @@ public class ChampionOverviewTab extends Fragment{
     }
 
 }
-
-//TODO add main info, info, and tips fragments here

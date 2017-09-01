@@ -3,4 +3,27 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="26dp"
+        android:text="Champion's lore" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dividerColor" />
+
+    <TextView
+        android:gravity="fill_vertical"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
+        android:id="@+id/champion_lore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health: " />
+
 </LinearLayout>

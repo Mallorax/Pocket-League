@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.fragments.enemy_tips;
+package pl.patrykzygo.pocketleague.ui.fragments.lore_fragment;
 
 
 import android.content.Context;
@@ -11,22 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.POJO.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
 
-public class ChampionTipsFragment extends Fragment{
+public class ChampionLoreFragment extends Fragment{
 
-    @BindView(R.id.champion_enemy_tips)
-    TextView championTips;
+    @BindView(R.id.champion_lore)
+    TextView championLore;
 
     private ChampionDto champion;
 
-    public static ChampionTipsFragment newInstance(@NonNull ChampionDto champion){
-        ChampionTipsFragment fragment = new ChampionTipsFragment();
+    public static ChampionLoreFragment newInstance(@NonNull ChampionDto champion){
+        ChampionLoreFragment fragment = new ChampionLoreFragment();
         fragment.setChampion(champion);
         return fragment;
     }
@@ -43,7 +41,7 @@ public class ChampionTipsFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.champion_tips_fragment, container, false);
+        View view = inflater.inflate(R.layout.champion_lore_fragment, container, false);
         ButterKnife.bind(this, view);
         attachInfo();
         return view;
@@ -55,12 +53,8 @@ public class ChampionTipsFragment extends Fragment{
     }
 
     private void attachInfo(){
-        StringBuilder tips = new StringBuilder();
-        List<String> tipsList = champion.getAllytips();
-        tipsList.addAll(champion.getEnemytips());
-        for (String tip : tipsList){
-            tips.append(tip + "\n\n");
-        }
-        championTips.setText(tips.toString());
+        String lore = champion.getLore().replace("<br>", "\n");
+        championLore.setText(lore);
     }
+
 }
