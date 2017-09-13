@@ -28,7 +28,13 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
     @Override
     public void showChampions() {
-        subscriptions.add(riotRepository.getChampions()
+        view.showLoading();
+        getChampions();
+        view.hideLoading();
+    }
+
+    private void getChampions(){
+        subscriptions.add(riotRepository.requestChampions()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((championsList) ->{
                     view.attachChampions(championsList);

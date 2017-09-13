@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
@@ -30,6 +32,9 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @BindView(R.id.champions_recycler_view)
     RecyclerView championsRecyclerView;
+
+    @BindView(R.id.activity_champions_progressBar)
+    ProgressBar progressBar;
 
 
     @Override
@@ -74,5 +79,15 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     protected void onDestroy() {
         super.onDestroy();
         presenter.setView(null);
+    }
+
+    @Override
+    public void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressBar.setVisibility(View.GONE);
     }
 }

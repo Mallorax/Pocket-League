@@ -32,7 +32,7 @@ public class RiotDataRepository implements RiotRepository {
     }
 
     @Override
-    public Observable<List<ChampionDto>> getChampions() {
+    public Observable<List<ChampionDto>> requestChampions() {
         return riotApi.getChampionsList()
                 .subscribeOn(Schedulers.io())
                 .flatMap(riotResponse -> Observable.just(new ArrayList<>(riotResponse.getData().values())))
