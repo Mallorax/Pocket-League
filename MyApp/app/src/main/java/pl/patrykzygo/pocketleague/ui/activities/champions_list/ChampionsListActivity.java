@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,6 +37,9 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @BindView(R.id.activity_champions_progressBar)
     ProgressBar progressBar;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,9 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
         ((App) getApplication()).getAppComponent().inject(this);
 
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+
         championsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         presenter.setView(this);

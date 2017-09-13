@@ -44,7 +44,7 @@ public class ChampionActivity extends AppCompatActivity implements ChampionView{
         presenter.setView(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         presenter.presentChampion(getIntent().getBundleExtra("bundle").getInt("id"));
         tabLayout.setupWithViewPager(viewPager);
     }
