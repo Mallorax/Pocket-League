@@ -69,4 +69,10 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
         i.putExtra("bundle", bundle);
         startActivity(i);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
+    }
 }
