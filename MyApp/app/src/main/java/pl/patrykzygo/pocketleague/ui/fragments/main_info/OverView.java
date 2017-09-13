@@ -35,6 +35,10 @@ public class OverView extends Fragment{
         return fragment;
     }
 
+    public ChampionDto getChampion() {
+        return champion;
+    }
+
     public void setChampion(ChampionDto champion){
         this.champion = champion;
     }
@@ -42,6 +46,7 @@ public class OverView extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable

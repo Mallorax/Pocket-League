@@ -31,9 +31,14 @@ public class ChampionLoreTab extends Fragment{
         this.champion = champion;
     }
 
+    public ChampionDto getChampion() {
+        return champion;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable

@@ -25,6 +25,7 @@ android {
                 riotKey: RIOT_API_KEY
         ]
     }
+
     buildTypes {
         release {
             minifyEnabled false
