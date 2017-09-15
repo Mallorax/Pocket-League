@@ -1,8 +1,6 @@
 package pl.patrykzygo.pocketleague.dagger;
 
 
-import com.squareup.picasso.Picasso;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -17,7 +15,7 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    RiotRepository providesRiotDataRepository(RiotApi riotApi, Picasso picasso, ChampionDataParser dataParser){
-        return new RiotDataRepository(riotApi, picasso, dataParser);
+    RiotRepository providesRiotDataRepository(RiotApi riotApi, ChampionDataParser dataParser){
+        return new RiotDataRepository(riotApi, dataParser);
     }
 }

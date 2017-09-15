@@ -1,8 +1,6 @@
 package pl.patrykzygo.pocketleague.repositories;
 
 
-import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,13 +18,11 @@ public class RiotDataRepository implements RiotRepository {
 
 
     private RiotApi riotApi;
-    private Picasso picasso;
     private ChampionDataParser dataParser;
 
     @Inject
-    public RiotDataRepository(RiotApi riotApi, Picasso picasso, ChampionDataParser dataParser){
+    public RiotDataRepository(RiotApi riotApi, ChampionDataParser dataParser){
         this.riotApi = riotApi;
-        this.picasso = picasso;
         this.dataParser = dataParser;
     }
 
@@ -37,6 +33,13 @@ public class RiotDataRepository implements RiotRepository {
                 .flatMap(riotResponse -> Observable.just(new ArrayList<>(riotResponse.getData().values())))
                 .flatMap((list) -> {
                     Collections.sort(list, (p1, p2) -> p1.getName().compareTo(p2.getName()));
+                    for (int i=0; i < list.size(); i++){
+                        try {
+                            list.set(i, dataParser.setChampionIcon(list.get(i)));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     return Observable.just(list);
                 });
     }

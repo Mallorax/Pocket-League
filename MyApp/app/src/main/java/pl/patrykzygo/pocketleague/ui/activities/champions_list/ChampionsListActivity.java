@@ -2,28 +2,33 @@ package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionActivity;
 
 
-public class ChampionsListActivity extends AppCompatActivity implements ChampionsListView, ChampionsListAdapter.OnChampionClickListener {
+public class ChampionsListActivity extends AppCompatActivity implements ChampionsListView, ChampionsListAdapter.OnChampionClickListener , SearchView.OnQueryTextListener{
 
     @Inject
     ChampionsListPresenter presenter;
@@ -39,6 +44,8 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    private List<ChampionDto> champions;
 
 
     @Override
@@ -61,11 +68,13 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public void attachChampions(List<ChampionDto> champions) {
+        this.champions = champions;
         adapter.setChampions(champions);
         adapter.setOnChampionClickListener(this);
         championsRecyclerView.setAdapter(adapter);
         championsRecyclerView.addItemDecoration(new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
         championsRecyclerView.getAdapter().notifyDataSetChanged();
+        championsRecyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -97,4 +106,39 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+
+    //TODO don't know if code below should be inside activity, have to check it out
+    //TODO you can't see filtered positions after deleting text, fix that fast
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        query = query.toLowerCase();
+        final List<ChampionDto> filteredList = new ArrayList<>();
+        for (ChampionDto champ : champions){
+            final String text = champ.getName().toLowerCase();
+            if (text.contains(query)) {
+                filteredList.add(champ);
+            }
+        }
+        adapter.animateTo(filteredList);
+        championsRecyclerView.scrollToPosition(0);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
 }

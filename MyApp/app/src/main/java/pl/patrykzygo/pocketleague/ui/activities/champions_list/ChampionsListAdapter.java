@@ -1,7 +1,6 @@
 package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,35 +8,85 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
-import javax.inject.Inject;
-
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
-import pl.patrykzygo.pocketleague.app.Constants;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 
 
 public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdapter.ChampionsViewHolder> {
 
     private List<ChampionDto> champions;
-    private Picasso picasso;
+    private List<ChampionDto> championsCopy;
     private OnChampionClickListener onChampionClickListener;
 
     public void setOnChampionClickListener(OnChampionClickListener championClickListener){
         this.onChampionClickListener = championClickListener;
     }
 
-    @Inject
-    public ChampionsListAdapter(Picasso picasso) {
-        this.picasso = picasso;
+    public List<ChampionDto> getChampions() {
+        return champions;
     }
+
 
     public void setChampions(List<ChampionDto> champions){
         this.champions = champions;
+        this.championsCopy = champions;
     }
+
+
+    public void animateTo(List<ChampionDto> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+    public ChampionDto removeItem(int position) {
+        final ChampionDto model = champions.remove(position);
+        notifyItemRemoved(position);
+        return model;
+    }
+
+    public void addItem(int position, ChampionDto model) {
+        champions.add(position, model);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final ChampionDto model = champions.remove(fromPosition);
+        champions.add(toPosition, model);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    private void applyAndAnimateRemovals(List<ChampionDto> newModels) {
+        for (int i = champions.size() - 1; i >= 0; i--) {
+            final ChampionDto model = champions.get(i);
+            if (!newModels.contains(model)) {
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<ChampionDto> newModels) {
+        for (int i = 0, count = newModels.size(); i < count; i++) {
+            final ChampionDto model = newModels.get(i);
+            if (!champions.contains(model)) {
+                addItem(i, model);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<ChampionDto> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final ChampionDto model = newModels.get(toPosition);
+            final int fromPosition = champions.indexOf(model);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+
+
 
     @Override
     public ChampionsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,10 +100,10 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
         ChampionDto champ = champions.get(position);
         holder.nameView.setText(champ.getName());
         holder.titleView.setText(champ.getTitle());
-        picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/champion/"+champ.getImage().getFull()))
-                .resize(64, 64)
-                .into(holder.imageView);
+        holder.imageView.setImageBitmap(champ.getImage().getBitmap());
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -66,7 +115,6 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     }
 
     public class ChampionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
 
         private TextView nameView;
         private TextView titleView;
