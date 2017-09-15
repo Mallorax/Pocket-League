@@ -93,7 +93,7 @@ public class ChampionInfoFragment extends Fragment {
         championAr.append(Double.toString(champion.getStats().getAttackrange()));
         championArmor.append(Double.toString(champion.getStats().getArmor()) + " (+" + Double.toString(champion.getStats().getArmorperlevel()) + " per level)");
         championMr.append(Double.toString(champion.getStats().getSpellblock()) + " (+" + Double.toString(champion.getStats().getSpellblockperlevel()) + " per level)");
-        championAs.append(Double.toString(champion.getStats().getAttackspeedoffset()) + " (+" + Double.toString(champion.getStats().getAttackspeedperlevel()) + "% per level)"); //TODO attack speed offset is not attack speed value, need to insert it to specific formula in order to get attack speed
+        championAs.append(Double.toString(champion.getStats().getAttackspeed()) + " (+" + Double.toString(champion.getStats().getAttackspeedperlevel()) + "% per level)");
         championMs.append(Double.toString(champion.getStats().getMovespeed()));
     }
 }

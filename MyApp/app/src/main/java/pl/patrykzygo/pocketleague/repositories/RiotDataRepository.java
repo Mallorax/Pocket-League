@@ -1,8 +1,6 @@
 package pl.patrykzygo.pocketleague.repositories;
 
 
-import android.net.Uri;
-
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -12,10 +10,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
-import pl.patrykzygo.pocketleague.pojo.ChampionSpellDto;
-import pl.patrykzygo.pocketleague.app.Constants;
+import pl.patrykzygo.pocketleague.logic.ChampionDataParser;
 import pl.patrykzygo.pocketleague.network.RiotApi;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -24,11 +21,13 @@ public class RiotDataRepository implements RiotRepository {
 
     private RiotApi riotApi;
     private Picasso picasso;
+    private ChampionDataParser dataParser;
 
     @Inject
-    public RiotDataRepository(RiotApi riotApi, Picasso picasso){
+    public RiotDataRepository(RiotApi riotApi, Picasso picasso, ChampionDataParser dataParser){
         this.riotApi = riotApi;
         this.picasso = picasso;
+        this.dataParser = dataParser;
     }
 
     @Override
@@ -48,16 +47,12 @@ public class RiotDataRepository implements RiotRepository {
                 .subscribeOn(Schedulers.io())
                 .flatMap(championDto -> {
                     try {
-                        championDto.getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/champion/"+championDto.getImage().getFull())).get());
-                        championDto.getPassive().getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/passive/" +championDto.getPassive().getImage().getFull())).get());
-                        List<ChampionSpellDto> spellDtos = championDto.getSpells();
-                        for (ChampionSpellDto spell : spellDtos){
-                            spell.getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/spell/" +spell.getImage().getFull())).get());
-                        }
-                    } catch (IOException e) {
+                        ChampionDto champion = dataParser.parseThroughAll(championDto);
+                        return Observable.just(champion);
+                    }catch (IOException e){
                         e.printStackTrace();
+                        return null;
                     }
-                    return Observable.just(championDto);
                 });
     }
 }

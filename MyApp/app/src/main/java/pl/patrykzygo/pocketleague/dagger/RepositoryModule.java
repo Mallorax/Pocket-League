@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.patrykzygo.pocketleague.logic.ChampionDataParser;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import pl.patrykzygo.pocketleague.repositories.RiotDataRepository;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
@@ -16,7 +17,7 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    RiotRepository providesRiotDataRepository(RiotApi riotApi, Picasso picasso){
-        return new RiotDataRepository(riotApi, picasso);
+    RiotRepository providesRiotDataRepository(RiotApi riotApi, Picasso picasso, ChampionDataParser dataParser){
+        return new RiotDataRepository(riotApi, picasso, dataParser);
     }
 }

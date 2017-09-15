@@ -15,7 +15,8 @@ import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.static_info.Static
         AdapterModule.class,
         PresenterModule.class,
         PicassoModule.class,
-        RepositoryModule.class
+        RepositoryModule.class,
+        LogicModule.class
 })
 public interface AppComponent {
 

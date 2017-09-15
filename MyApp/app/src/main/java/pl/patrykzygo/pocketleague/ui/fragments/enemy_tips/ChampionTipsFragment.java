@@ -11,12 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 
 public class ChampionTipsFragment extends Fragment{
 
@@ -60,12 +58,6 @@ public class ChampionTipsFragment extends Fragment{
     }
 
     private void attachInfo(){
-        StringBuilder tips = new StringBuilder();
-        List<String> tipsList = champion.getAllytips();
-        tipsList.addAll(champion.getEnemytips());
-        for (String tip : tipsList){
-            tips.append(tip + "\n\n");
-        }
-        championTips.setText(tips.toString());
+        championTips.setText(champion.getAllTips());
     }
 }

@@ -23,6 +23,15 @@ public class ChampionDto {
     private int id;
     private String blurb;
     private List<ChampionSpellDto> spells;
+    private String allTips;
+
+    public String getAllTips() {
+        return allTips;
+    }
+
+    public void setAllTips(String allTips) {
+        this.allTips = allTips;
+    }
 
     public InfoDto getInfo() {
         return info;

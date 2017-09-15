@@ -58,8 +58,7 @@ public class ChampionLoreFragment extends Fragment{
     }
 
     private void attachInfo(){
-        String lore = champion.getLore().replace("<br>", "\n");
-        championLore.setText(lore);
+        championLore.setText(champion.getLore());
     }
 
 }

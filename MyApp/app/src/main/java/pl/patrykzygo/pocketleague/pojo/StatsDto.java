@@ -24,6 +24,15 @@ public class StatsDto {
     private double attackspeedperlevel;
     private double hpregen;
     private double critperlevel;
+    private double attackspeed;
+
+    public double getAttackspeed() {
+        return attackspeed;
+    }
+
+    public void setAttackspeed(double attackspeed) {
+        this.attackspeed = attackspeed;
+    }
 
     public double getArmorperlevel() {
         return armorperlevel;
