@@ -16,8 +16,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.POJO.ChampionDto;
-import pl.patrykzygo.pocketleague.POJO.ChampionSpellDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionSpellDto;
 import pl.patrykzygo.pocketleague.R;
 
 public class ChampionAbilitiesFragment extends Fragment {

@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.POJO;
+package pl.patrykzygo.pocketleague.pojo;
 
 
 public class InfoDto {

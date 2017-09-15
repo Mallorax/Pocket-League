@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.POJO.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.ui.fragments.enemy_tips.ChampionTipsFragment;
 import pl.patrykzygo.pocketleague.ui.fragments.info.ChampionInfoFragment;

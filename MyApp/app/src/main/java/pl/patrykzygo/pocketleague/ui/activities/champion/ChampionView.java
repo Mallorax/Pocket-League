@@ -1,7 +1,7 @@
 package pl.patrykzygo.pocketleague.ui.activities.champion;
 
 
-import pl.patrykzygo.pocketleague.POJO.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 
 public interface ChampionView {
 

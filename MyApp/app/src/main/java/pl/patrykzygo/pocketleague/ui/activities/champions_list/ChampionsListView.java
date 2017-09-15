@@ -3,7 +3,7 @@ package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 import java.util.List;
 
-import pl.patrykzygo.pocketleague.POJO.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 
 public interface ChampionsListView {
 

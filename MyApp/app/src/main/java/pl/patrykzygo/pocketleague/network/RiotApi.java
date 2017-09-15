@@ -1,8 +1,8 @@
 package pl.patrykzygo.pocketleague.network;
 
 import pl.patrykzygo.pocketleague.BuildConfig;
-import pl.patrykzygo.pocketleague.POJO.ChampionDto;
-import pl.patrykzygo.pocketleague.POJO.ChampionListDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionListDto;
 import pl.patrykzygo.pocketleague.app.Constants;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
