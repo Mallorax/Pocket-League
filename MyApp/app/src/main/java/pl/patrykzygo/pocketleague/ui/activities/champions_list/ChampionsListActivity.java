@@ -25,6 +25,7 @@ import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
 import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionActivity;
+import pl.patrykzygo.pocketleague.ui.adapters.ChampionsListAdapter;
 
 
 public class ChampionsListActivity extends AppCompatActivity implements ChampionsListView, ChampionsListAdapter.OnChampionClickListener , SearchView.OnQueryTextListener{

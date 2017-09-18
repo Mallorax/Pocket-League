@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.activities.champions_list;
+package pl.patrykzygo.pocketleague.ui.adapters;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -69,7 +69,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
         return champions.size();
     }
 
-    interface OnChampionClickListener {
+    public interface OnChampionClickListener {
         void onChampionClick(ChampionDto champion);
     }
 
