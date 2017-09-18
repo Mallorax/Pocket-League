@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -123,21 +122,13 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public boolean onQueryTextChange(String query) {
-        query = query.toLowerCase();
-        final List<ChampionDto> filteredList = new ArrayList<>();
-        for (ChampionDto champ : champions){
-            final String text = champ.getName().toLowerCase();
-            if (text.contains(query)) {
-                filteredList.add(champ);
-            }
-        }
-        adapter.animateTo(filteredList);
-        championsRecyclerView.scrollToPosition(0);
+        adapter.filter(query);
         return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        adapter.filter(query);
         return false;
     }
 
