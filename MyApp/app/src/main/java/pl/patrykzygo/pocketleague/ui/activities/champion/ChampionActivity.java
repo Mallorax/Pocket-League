@@ -16,6 +16,7 @@ import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
 import pl.patrykzygo.pocketleague.ui.adapters.ViewPagerAdapter;
+import pl.patrykzygo.pocketleague.ui.fragments.base_fragments.BaseChampionFragment;
 import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.abilities_tab.ChampionAbilitiesTab;
 import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.lore_tab.ChampionLoreTab;
 import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.overview_tab.ChampionOverviewTab;
@@ -54,11 +55,25 @@ public class ChampionActivity extends AppCompatActivity implements ChampionView{
     public void setTabs(ChampionDto champion) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(ChampionOverviewTab.newInstance(champion), "Overview");
-        adapter.addFragment(ChampionLoreTab.newInstance(champion), "Lore");
-        adapter.addFragment(ChampionAbilitiesTab.newInstance(champion), "Abilities");
+        BaseChampionFragment overViewTab = new ChampionOverviewTab();
+        BaseChampionFragment abilitiesTab = new ChampionAbilitiesTab();
+        BaseChampionFragment loreTab = new ChampionLoreTab();
+
+        overViewTab.setChampion(champion);
+        abilitiesTab.setChampion(champion);
+        loreTab.setChampion(champion);
+
+        adapter.addFragment(overViewTab, "Overview");
+        adapter.addFragment(abilitiesTab, "Lore");
+        adapter.addFragment(loreTab, "Abilities");
 
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.setView(null);
     }
 
     @Override

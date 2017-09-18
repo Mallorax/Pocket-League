@@ -1,11 +1,8 @@
 package pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.overview_tab;
 
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -13,57 +10,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.R;
+import pl.patrykzygo.pocketleague.ui.fragments.base_fragments.BaseChampionFragment;
 import pl.patrykzygo.pocketleague.ui.fragments.enemy_tips.ChampionTipsFragment;
 import pl.patrykzygo.pocketleague.ui.fragments.info.ChampionInfoFragment;
-import pl.patrykzygo.pocketleague.ui.fragments.main_info.OverView;
+import pl.patrykzygo.pocketleague.ui.fragments.main_info.OverViewFragment;
 
-public class ChampionOverviewTab extends Fragment{
+public class ChampionOverviewTab extends BaseChampionFragment{
 
-    private ChampionDto champion;
-
-
-    public static ChampionOverviewTab newInstance(@NonNull ChampionDto champion){
-        ChampionOverviewTab fragment = new ChampionOverviewTab();
-        fragment.setChampion(champion);
-        return fragment;
-    }
-
-    public void setChampion(ChampionDto champion){
-        this.champion = champion;
-    }
-
-    public ChampionDto getChampion() {
-        return champion;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.champion_overview_tab, container, false);
         ButterKnife.bind(this, view);
-        attachFragments();
+        attachInfo();
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
 
-    private void attachFragments(){
+    public void attachInfo(){
+        BaseChampionFragment overView = new OverViewFragment();
+        BaseChampionFragment championInfo = new ChampionInfoFragment();
+        BaseChampionFragment championTips = new ChampionTipsFragment();
+        overView.setChampion(getChampion());
+        championInfo.setChampion(getChampion());
+        championTips.setChampion(getChampion());
         FragmentManager manager = getChildFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.overview_first_fragment, OverView.newInstance(champion));
-        transaction.replace(R.id.overview_second_fragment, ChampionInfoFragment.newInstance(champion));
-        transaction.replace(R.id.overview_third_fragment, ChampionTipsFragment.newInstance(champion));
+        transaction.replace(R.id.overview_first_fragment, overView);
+        transaction.replace(R.id.overview_second_fragment, championInfo);
+        transaction.replace(R.id.overview_third_fragment, championTips);
         transaction.commit();
     }
 

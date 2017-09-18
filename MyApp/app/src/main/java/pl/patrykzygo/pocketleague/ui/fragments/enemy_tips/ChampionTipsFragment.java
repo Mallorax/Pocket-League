@@ -1,11 +1,8 @@
 package pl.patrykzygo.pocketleague.ui.fragments.enemy_tips;
 
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,34 +11,12 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.ui.fragments.base_fragments.BaseChampionFragment;
 
-public class ChampionTipsFragment extends Fragment{
+public class ChampionTipsFragment extends BaseChampionFragment{
 
     @BindView(R.id.champion_enemy_tips)
     TextView championTips;
-
-    private ChampionDto champion;
-
-    public static ChampionTipsFragment newInstance(@NonNull ChampionDto champion){
-        ChampionTipsFragment fragment = new ChampionTipsFragment();
-        fragment.setChampion(champion);
-        return fragment;
-    }
-
-    public void setChampion(ChampionDto champion){
-        this.champion = champion;
-    }
-
-    public ChampionDto getChampion() {
-        return champion;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
 
     @Nullable
     @Override
@@ -52,12 +27,8 @@ public class ChampionTipsFragment extends Fragment{
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
 
-    private void attachInfo(){
-        championTips.setText(champion.getAllTips());
+    public void attachInfo(){
+        championTips.setText(getChampion().getAllTips());
     }
 }

@@ -1,11 +1,8 @@
 package pl.patrykzygo.pocketleague.ui.fragments.abilities_fragment;
 
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +13,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
-import pl.patrykzygo.pocketleague.pojo.ChampionSpellDto;
 import pl.patrykzygo.pocketleague.R;
+import pl.patrykzygo.pocketleague.pojo.ChampionSpellDto;
+import pl.patrykzygo.pocketleague.ui.fragments.base_fragments.BaseChampionFragment;
 
-public class ChampionAbilitiesFragment extends Fragment {
+public class ChampionAbilitiesFragment extends BaseChampionFragment {
 
     @BindView(R.id.passive_image)
     ImageView passiveImage;
@@ -52,27 +49,6 @@ public class ChampionAbilitiesFragment extends Fragment {
     @BindView(R.id.r_description)
     TextView rDescription;
 
-    private ChampionDto champion;
-
-    public static ChampionAbilitiesFragment newInstance(@NonNull ChampionDto champion){
-        ChampionAbilitiesFragment fragment = new ChampionAbilitiesFragment();
-        fragment.setChampion(champion);
-        return fragment;
-    }
-
-    public void setChampion(ChampionDto champion){
-        this.champion = champion;
-    }
-
-    public ChampionDto getChampion(){
-        return champion;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
 
     @Nullable
     @Override
@@ -83,20 +59,16 @@ public class ChampionAbilitiesFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
 
-    private void attachInfo(){
-        List<ChampionSpellDto> spellsList = champion.getSpells();
-        passiveImage.setImageBitmap(champion.getPassive().getImage().getBitmap());
+    public void attachInfo(){
+        List<ChampionSpellDto> spellsList = getChampion().getSpells();
+        passiveImage.setImageBitmap(getChampion().getPassive().getImage().getBitmap());
         qImage.setImageBitmap(spellsList.get(0).getImage().getBitmap());
         wImage.setImageBitmap(spellsList.get(1).getImage().getBitmap());
         eImage.setImageBitmap(spellsList.get(2).getImage().getBitmap());
         rImage.setImageBitmap(spellsList.get(3).getImage().getBitmap());
 
-        passiveDescription.setText(champion.getPassive().getSanitizedDescription());
+        passiveDescription.setText(getChampion().getPassive().getSanitizedDescription());
         qDescription.setText(spellsList.get(0).getSanitizedDescription());
         wDescription.setText(spellsList.get(1).getSanitizedDescription());
         eDescription.setText(spellsList.get(2).getSanitizedDescription());
