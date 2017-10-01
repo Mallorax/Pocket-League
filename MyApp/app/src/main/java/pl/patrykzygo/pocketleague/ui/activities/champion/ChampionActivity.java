@@ -64,8 +64,8 @@ public class ChampionActivity extends AppCompatActivity implements ChampionView{
         loreTab.setChampion(champion);
 
         adapter.addFragment(overViewTab, "Overview");
-        adapter.addFragment(abilitiesTab, "Lore");
-        adapter.addFragment(loreTab, "Abilities");
+        adapter.addFragment(abilitiesTab, "Abilities");
+        adapter.addFragment(loreTab, "Lore");
 
         viewPager.setAdapter(adapter);
     }

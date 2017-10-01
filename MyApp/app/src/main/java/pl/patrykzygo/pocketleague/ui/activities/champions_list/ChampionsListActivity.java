@@ -45,7 +45,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private List<ChampionDto> champions;
+    //TODO user needs to scroll list up into a top to see the search bar, fix that
 
 
     @Override
@@ -68,7 +68,6 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public void attachChampions(List<ChampionDto> champions) {
-        this.champions = champions;
         adapter.setChampions(champions);
         adapter.setOnChampionClickListener(this);
         championsRecyclerView.setAdapter(adapter);
