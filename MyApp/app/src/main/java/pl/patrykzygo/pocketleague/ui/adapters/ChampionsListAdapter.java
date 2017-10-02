@@ -50,7 +50,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     @Override
     public ChampionsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View championView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.champions_list_item, parent, false);
+                .inflate(R.layout.champions_list_position, parent, false);
         return new ChampionsViewHolder(championView);
     }
 

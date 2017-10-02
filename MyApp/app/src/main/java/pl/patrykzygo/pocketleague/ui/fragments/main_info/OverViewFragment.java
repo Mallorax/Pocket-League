@@ -26,7 +26,7 @@ public class OverViewFragment extends BaseChampionFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.champions_list_item, container, false);
+        View view = inflater.inflate(R.layout.champions_list_position, container, false);
         ButterKnife.bind(this, view);
         attachInfo();
         return view;

@@ -51,7 +51,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_champions_list);
+        setContentView(R.layout.list_activity);
 
         ((App) getApplication()).getAppComponent().inject(this);
 
