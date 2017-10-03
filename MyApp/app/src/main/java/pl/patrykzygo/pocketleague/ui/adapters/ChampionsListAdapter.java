@@ -70,7 +70,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     }
 
     public interface OnChampionClickListener {
-        void onChampionClick(ChampionDto champion);
+        void onChampionClicked(ChampionDto champion);
     }
 
     public class ChampionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -89,7 +89,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
         @Override
         public void onClick(View v) {
-            onChampionClickListener.onChampionClick(champions.get(getLayoutPosition()));
+            onChampionClickListener.onChampionClicked(champions.get(getLayoutPosition()));
         }
     }
 }

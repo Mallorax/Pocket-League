@@ -28,7 +28,7 @@ import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionActivity;
 import pl.patrykzygo.pocketleague.ui.adapters.ChampionsListAdapter;
 
 
-public class ChampionsListActivity extends AppCompatActivity implements ChampionsListView, ChampionsListAdapter.OnChampionClickListener , SearchView.OnQueryTextListener{
+public class ChampionsListActivity extends AppCompatActivity implements ChampionsListView, ChampionsListAdapter.OnChampionClickListener, SearchView.OnQueryTextListener{
 
     @Inject
     ChampionsListPresenter presenter;
@@ -36,10 +36,10 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @Inject
     ChampionsListAdapter adapter;
 
-    @BindView(R.id.champions_recycler_view)
+    @BindView(R.id.list_activity_recycler_view)
     RecyclerView championsRecyclerView;
 
-    @BindView(R.id.activity_champions_progressBar)
+    @BindView(R.id.list_activity_progressBar)
     ProgressBar progressBar;
 
     @BindView(R.id.toolbar)
@@ -82,7 +82,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     }
 
     @Override
-    public void onChampionClick(ChampionDto champion) {
+    public void onChampionClicked(ChampionDto champion) {
         Intent i = new Intent(this, ChampionActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("id", champion.getId());
