@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".ui.activities.champions_list.ChampionsListActivity"/>
         <activity android:name=".ui.activities.champion.ChampionActivity"/>
+        <activity android:name=".ui.activities.items_list.ItemsListActivity"/>
 
 
     </application>

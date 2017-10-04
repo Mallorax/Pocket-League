@@ -14,7 +14,7 @@ public class LogicModule {
 
     @Provides
     @Singleton
-    ChampionDataParser providesChampiondataparser(Picasso picasso){
+    ChampionDataParser providesChampionDataParser(Picasso picasso){
         return new ChampionDataParser(picasso);
     }
 }

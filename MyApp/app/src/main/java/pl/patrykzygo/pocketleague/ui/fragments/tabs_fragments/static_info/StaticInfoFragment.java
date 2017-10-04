@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
+import pl.patrykzygo.pocketleague.ui.activities.items_list.ItemsListActivity;
 import pl.patrykzygo.pocketleague.ui.adapters.StaticInfoAdapter;
 import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListActivity;
 
@@ -64,6 +65,9 @@ public class StaticInfoFragment extends Fragment implements StaticInfoAdapter.On
         switch (positionName){
             case "Champions":
                 startActivity(new Intent(getContext(), ChampionsListActivity.class));
+                break;
+            case "Items":
+                startActivity(new Intent(getContext(), ItemsListActivity.class));
                 break;
             default:
                 Toast.makeText(getContext(), "Unknown error occurred", Toast.LENGTH_LONG).show();

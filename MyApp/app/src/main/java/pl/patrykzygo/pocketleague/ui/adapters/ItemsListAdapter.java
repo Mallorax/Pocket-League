@@ -38,7 +38,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
         ItemDto item = itemsList.get(position);
         holder.imageView.setImageBitmap(item.getImage().getBitmap());
         holder.nameView.setText(item.getName());
-        holder.priceView.setText(item.getGold().getTotal());
+        holder.priceView.setText(Integer.toString(item.getGold().getTotal()));
     }
 
     @Override

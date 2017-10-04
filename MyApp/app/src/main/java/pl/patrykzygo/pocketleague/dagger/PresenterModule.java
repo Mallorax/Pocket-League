@@ -9,6 +9,8 @@ import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionPresenter;
 import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionPresenterImpl;
 import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListImpl;
 import pl.patrykzygo.pocketleague.ui.activities.champions_list.ChampionsListPresenter;
+import pl.patrykzygo.pocketleague.ui.activities.items_list.ItemsListPresenter;
+import pl.patrykzygo.pocketleague.ui.activities.items_list.ItemsListPresenterImpl;
 
 @Module
 public class PresenterModule {
@@ -23,5 +25,11 @@ public class PresenterModule {
     @Singleton
     ChampionPresenter providesChampionPresenter(RiotRepository repository){
         return new ChampionPresenterImpl(repository);
+    }
+
+    @Provides
+    @Singleton
+    ItemsListPresenter providesItemsListPresenter (RiotRepository repository){
+        return  new ItemsListPresenterImpl(repository);
     }
 }

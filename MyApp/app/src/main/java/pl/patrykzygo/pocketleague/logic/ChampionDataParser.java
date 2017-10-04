@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import pl.patrykzygo.pocketleague.app.Constants;
 import pl.patrykzygo.pocketleague.pojo.ChampionDto;
 import pl.patrykzygo.pocketleague.pojo.ChampionSpellDto;
+import pl.patrykzygo.pocketleague.pojo.ItemDto;
 
 public class ChampionDataParser {
 
@@ -32,6 +33,11 @@ public class ChampionDataParser {
     public ChampionDto setChampionIcon(ChampionDto champion)throws IOException{
         champion.getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION+"/img/champion/"+champion.getImage().getFull())).get());
         return champion;
+    }
+
+    public ItemDto setItemIcon(ItemDto item)throws IOException{
+        item.getImage().setBitmap(picasso.load(Uri.parse("http://ddragon.leagueoflegends.com/cdn/"+Constants.VERSION+"/img/item/" + item.getImage().getFull())).get());
+        return item;
     }
 
     public ChampionDto setChampionSkillsIcons(ChampionDto champion)throws IOException{

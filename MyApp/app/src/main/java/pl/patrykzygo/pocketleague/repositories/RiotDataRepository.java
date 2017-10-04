@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import pl.patrykzygo.pocketleague.logic.ChampionDataParser;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.ItemDto;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -56,6 +57,25 @@ public class RiotDataRepository implements RiotRepository {
                         e.printStackTrace();
                         return null;
                     }
+                });
+    }
+
+    @Override
+    public Observable<List<ItemDto>> getItemsList() {
+        return riotApi.getItemsList()
+                .subscribeOn(Schedulers.io())
+                .flatMap(riotResponse -> Observable.just(new ArrayList<>(riotResponse.getData().values())))
+                .flatMap(itemsList -> {
+                    Collections.sort(itemsList, (p1, p2) -> Integer.compare(p1.getGold().getTotal(), p2.getGold().getTotal()));
+                    itemsList.removeIf(itemDto -> itemDto.getGold().getTotal() == 1625 || itemDto.getGold().getTotal() == 1425 || !itemDto.getGold().isPurchasable());
+                    for (int i=0; i < itemsList.size(); i++){
+                        try {
+                            itemsList.set(i, dataParser.setItemIcon(itemsList.get(i)));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return Observable.just(itemsList);
                 });
     }
 }
