@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.patrykzygo.pocketleague.R;
@@ -16,14 +17,33 @@ import pl.patrykzygo.pocketleague.pojo.ItemDto;
 public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.ItemsListViewHolder> {
 
     private List<ItemDto> itemsList;
+    private List<ItemDto> itemsListCopy;
     private OnListItemClickedListener listener;
 
     public void setItemsList(List<ItemDto> itemsList){
         this.itemsList = itemsList;
+        this.itemsListCopy = new ArrayList<>();
+        itemsListCopy.addAll(itemsList);
     }
 
-    public void setOnListIttemClickListener(OnListItemClickedListener listener){
+    public void setOnListItemClickListener(OnListItemClickedListener listener){
         this.listener = listener;
+
+    }
+
+    public void filter(String text) {
+        itemsList.clear();
+        if(text.isEmpty()){
+            itemsList.addAll(itemsListCopy);
+        } else{
+            text = text.toLowerCase();
+            for(ItemDto champion: itemsListCopy){
+                if(champion.getName().toLowerCase().contains(text)){
+                    itemsList.add(champion);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @Override
