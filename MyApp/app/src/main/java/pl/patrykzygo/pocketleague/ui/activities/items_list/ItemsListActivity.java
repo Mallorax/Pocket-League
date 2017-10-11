@@ -25,8 +25,9 @@ import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
 import pl.patrykzygo.pocketleague.pojo.ItemDto;
 import pl.patrykzygo.pocketleague.ui.adapters.ItemsListAdapter;
+import pl.patrykzygo.pocketleague.ui.fragments.dialog_fragments.SortDialog;
 
-public class ItemsListActivity extends AppCompatActivity implements ItemsListView, ItemsListAdapter.OnListItemClickedListener, SearchView.OnQueryTextListener {
+public class ItemsListActivity extends AppCompatActivity implements ItemsListView, ItemsListAdapter.OnListItemClickedListener, SearchView.OnQueryTextListener, SortDialog.SortDialogListener {
 
     @Inject
     ItemsListPresenter presenter;
@@ -110,5 +111,28 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
     public boolean onQueryTextSubmit(String query) {
         adapter.filter(query);
         return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+       switch (item.getItemId()){
+           case R.id.action_sort:
+               Toast.makeText(this, "Sort option clicked", Toast.LENGTH_LONG).show();
+               SortDialog dialog = new SortDialog();
+               dialog.show(getSupportFragmentManager(), "Sort");
+               return true;
+           case R.id.action_filter:
+               Toast.makeText(this, "Filter option clicked", Toast.LENGTH_LONG).show();
+               //TODO  implement action
+               return true;
+           default:
+               return super.onOptionsItemSelected(item);
+       }
+    }
+
+    @Override
+    public void onConfirmButtonClicked(int which) {
+        adapter.setItemsList(presenter.sortItems(adapter.getItemsList(), which));
+        adapter.notifyDataSetChanged();
     }
 }

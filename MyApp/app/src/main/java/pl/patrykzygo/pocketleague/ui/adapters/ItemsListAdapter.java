@@ -26,6 +26,10 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
         itemsListCopy.addAll(itemsList);
     }
 
+    public List<ItemDto> getItemsList(){
+        return itemsList;
+    }
+
     public void setOnListItemClickListener(OnListItemClickedListener listener){
         this.listener = listener;
 

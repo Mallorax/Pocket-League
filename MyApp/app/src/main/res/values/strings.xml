@@ -3,4 +3,14 @@
     <string name="one">one</string>
     <string name="two">two</string>
     <string name="action_search">search</string>
+    <string name="menu_sort">sort...</string>
+    <string name="menu_filter">filter...</string>
+    <string name="sort_dialog_title">Sort</string>
+    <string name="confirm">confirm</string>
+    <array name="sort_dialog_positions">
+        <item>By name (A-Z)</item>
+        <item>By name (Z-A)</item>
+        <item>By price (Asc)</item>
+        <item>By price (Desc)</item>
+    </array>
 </resources>
