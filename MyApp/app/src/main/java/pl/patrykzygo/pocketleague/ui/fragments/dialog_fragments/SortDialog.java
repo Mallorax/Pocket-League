@@ -3,7 +3,9 @@ package pl.patrykzygo.pocketleague.ui.fragments.dialog_fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -13,7 +15,9 @@ import pl.patrykzygo.pocketleague.R;
 public class SortDialog extends DialogFragment {
 
     private SortDialogListener listener;
-    private int position;
+    private static final String SELECTED_OPTION = "SelectedOption";
+    private SharedPreferences sharedPreference;
+    private SharedPreferences.Editor sharedPrefEditor;
 
     @Override
     public void onAttach(Context context) {
@@ -25,31 +29,40 @@ public class SortDialog extends DialogFragment {
         }
     }
 
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // TODO save position of a radio button marked by a user
-        if (savedInstanceState == null){
-            position = 2;
-        }else{
-            position = savedInstanceState.getInt("position");
-        }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.sort_dialog_title)
-                .setSingleChoiceItems(R.array.sort_dialog_positions, position, null)
+                .setSingleChoiceItems(R.array.sort_dialog_positions, getSelectedOption(), (dialog, which) ->{
+                    saveSelectedOption(which);
+                })
                 .setPositiveButton(R.string.confirm, (dialog, which) ->{
                     dialog.dismiss();
-                    position = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
-                    listener.onConfirmButtonClicked(position);
+                    listener.onConfirmButtonClicked(getSelectedOption());
         });
 
         return builder.create();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt("position", position);
-        super.onSaveInstanceState(outState);
+    private int getSelectedOption() {
+        if (sharedPreference == null) {
+            sharedPreference = PreferenceManager
+                    .getDefaultSharedPreferences(getContext());
+        }
+        return sharedPreference.getInt(SELECTED_OPTION, 2);
+    }
+
+    private void saveSelectedOption(int item) {
+        if (sharedPreference == null) {
+            sharedPreference = PreferenceManager
+                    .getDefaultSharedPreferences(getContext());
+        }
+        sharedPrefEditor = sharedPreference.edit();
+        sharedPrefEditor.putInt(SELECTED_OPTION, item);
+        sharedPrefEditor.commit();
     }
 
     public interface SortDialogListener{
