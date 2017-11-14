@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/standard_padding">
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/starting_items"/>
+
+        <CheckBox
+            android:id="@+id/jungle_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jungle"/>
+
+        <CheckBox
+            android:id="@+id/lane_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lane"/>
+
+        <View android:background="@color/dividerColor"
+            android:layout_width = "match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/tools"/>
+
+        <CheckBox
+            android:id="@+id/consumable_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/consumable"/>
+
+        <CheckBox
+            android:id="@+id/gold_income_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gold_income"/>
+
+        <CheckBox
+            android:id="@+id/vision_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vision_and_tools"/>
+
+        <View android:background="@color/dividerColor"
+            android:layout_width = "match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/defense"/>
+
+        <CheckBox
+            android:id="@+id/armor_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor"/>
+
+        <CheckBox
+            android:id="@+id/health_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/health"/>
+
+        <CheckBox
+            android:id="@+id/hr_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/health_regeneration"/>
+
+        <CheckBox
+            android:id="@+id/mr_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/magic_resistance"/>
+
+        <View android:background="@color/dividerColor"
+            android:layout_width = "match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/attack"/>
+
+        <CheckBox
+            android:id="@+id/as_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attack_speed"/>
+
+        <CheckBox
+            android:id="@+id/crit_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/critical_strike"/>
+
+        <CheckBox
+            android:id="@+id/damage_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/damage"/>
+
+        <CheckBox
+            android:id="@+id/lifesteal_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/life_steal"/>
+
+        <CheckBox
+            android:id="@+id/armor_pen_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_penetration"/>
+
+        <View android:background="@color/dividerColor"
+            android:layout_width = "match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/magic"/>
+
+        <CheckBox
+            android:id="@+id/cdr_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cooldown_reduction"/>
+
+        <CheckBox
+            android:id="@+id/mana_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mana"/>
+
+        <CheckBox
+            android:id="@+id/mana_regen_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mana_regeneration"/>
+
+        <CheckBox
+            android:id="@+id/ap_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ability_power"/>
+
+        <CheckBox
+            android:id="@+id/magic_pen_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/magic_penetration"/>
+
+        <View android:background="@color/dividerColor"
+            android:layout_width = "match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/movement"/>
+
+        <CheckBox
+            android:id="@+id/boots_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/boots"/>
+
+        <CheckBox
+            android:id="@+id/other_movement_items_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/other_movement"/>
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

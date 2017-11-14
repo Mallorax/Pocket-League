@@ -7,6 +7,33 @@
     <string name="menu_filter">filter...</string>
     <string name="sort_dialog_title">Sort</string>
     <string name="confirm">confirm</string>
+    <string name="starting_items">Starting Items</string>
+    <string name="jungle">Jungle</string>
+    <string name="lane">Lane</string>
+    <string name="tools">Tools</string>
+    <string name="consumable">Consumable</string>
+    <string name="gold_income">Gold Income</string>
+    <string name="vision_and_tools">Vision and Tools</string>
+    <string name="defense">Defense</string>
+    <string name="armor">Armor</string>
+    <string name="health">Health</string>
+    <string name="health_regeneration">Health Regeneration</string>
+    <string name="magic_resistance">Magic Resistance</string>
+    <string name="attack">Attack</string>
+    <string name="attack_speed">Attack Speed</string>
+    <string name="critical_strike">Critical Strike</string>
+    <string name="damage">Damage</string>
+    <string name="life_steal">Life Steal</string>
+    <string name="armor_penetration">Armor Penetration</string>
+    <string name="magic">Magic</string>
+    <string name="cooldown_reduction">Cooldown Reduction</string>
+    <string name="mana">Mana</string>
+    <string name="mana_regeneration">Mana Regeneration</string>
+    <string name="ability_power">Ability Power</string>
+    <string name="magic_penetration">Magic Penetration</string>
+    <string name="movement">Movement</string>
+    <string name="boots">Boots</string>
+    <string name="other_movement">Other Movement</string>
     <array name="sort_dialog_positions">
         <item>By name (A-Z)</item>
         <item>By name (Z-A)</item>
