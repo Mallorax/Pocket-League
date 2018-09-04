@@ -10,6 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import pl.patrykzygo.pocketleague.app.Constants;
+import pl.patrykzygo.pocketleague.error.ErrorInterceptor;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import retrofit2.Converter;
 import retrofit2.Retrofit;

@@ -3,6 +3,7 @@ package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 import javax.inject.Inject;
 
+import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -14,10 +15,13 @@ public class ChampionsListImpl implements ChampionsListPresenter {
     private ChampionsListView view;
     private RiotRepository riotRepository;
     private CompositeSubscription subscriptions;
+    private BaseSchedulerProvider schedulerProvider;
 
     @Inject
-    public ChampionsListImpl(RiotRepository riotDataRepository) {
+    public ChampionsListImpl(RiotRepository riotDataRepository,
+                             BaseSchedulerProvider schedulerProvider) {
         this.riotRepository = riotDataRepository;
+        this.schedulerProvider = schedulerProvider;
         this.subscriptions = new CompositeSubscription();
     }
 
@@ -35,7 +39,7 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
     private void getChampions(){
         subscriptions.add(riotRepository.requestChampions()
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(schedulerProvider.getUiScheduler())
                 .subscribe((championsList) ->{
                     view.attachChampions(championsList);
                 }, throwable -> {
