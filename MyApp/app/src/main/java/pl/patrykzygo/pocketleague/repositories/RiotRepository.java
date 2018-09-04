@@ -1,20 +1,16 @@
 package pl.patrykzygo.pocketleague.repositories;
 
 
-import android.content.ClipData;
 
-import java.util.List;
+import io.reactivex.Flowable;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
-import rx.Observable;
 
 public interface RiotRepository {
 
-    Observable<List<ChampionDto>> requestChampions();
+    Flowable<Champion> requestChampions();
 
-    Observable<ChampionDto> getChampionById(int id);
+    Flowable<Champion> getChampionById(int id);
 
-    Observable<List<ItemDto>> getItemsList();
 
 }

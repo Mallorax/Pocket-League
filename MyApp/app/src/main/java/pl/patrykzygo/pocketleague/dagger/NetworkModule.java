@@ -1,11 +1,14 @@
 package pl.patrykzygo.pocketleague.dagger;
 
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import pl.patrykzygo.pocketleague.app.Constants;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import retrofit2.Converter;
@@ -23,7 +26,7 @@ public class NetworkModule {
     @Provides
     @Named(NAME_BASE_URL)
     String provideBaseURLString(){
-        return Constants.BASE_URL;
+        return Constants.BASE_CONSTANTS_URL;
     }
 
     @Provides
@@ -35,8 +38,17 @@ public class NetworkModule {
     @Provides
     @Singleton
     Retrofit provideRetrofit(Converter.Factory converter, @Named(NAME_BASE_URL) String baseUrl){
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new ErrorInterceptor())
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .build();
+
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(client)
                 .addConverterFactory(converter)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory
                         .createWithScheduler(Schedulers.newThread()))

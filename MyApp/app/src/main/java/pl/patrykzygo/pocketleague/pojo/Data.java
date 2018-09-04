@@ -7,7 +7,7 @@ import java.util.Map;
 public class Data{
 
 	@SerializedName("championMap")
-	Map<String, Champion> championsMap;
+	private Map<String, Champion> championsMap;
 
 	public Map<String, Champion> getChampionsMap() {
 		return championsMap;
