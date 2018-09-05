@@ -2,11 +2,15 @@ package pl.patrykzygo.pocketleague.ui.activities.items_list;
 
 
 import android.support.annotation.Nullable;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.logic.ItemsListSorter;
+import pl.patrykzygo.pocketleague.pojo.Item;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
 
 public class ItemsListPresenterImpl implements ItemsListPresenter {
@@ -40,10 +44,10 @@ public class ItemsListPresenterImpl implements ItemsListPresenter {
     }
 
     private void getItems(){
-        disposableadd(repository.getItemsList()
-                .observeOn(AndroidSchedulers.mainThread())
+        disposable.add(repository.getItems()
+                .observeOn(schedulerProvider.getUiScheduler())
                 .subscribe((itemsList) -> {
-                    view.attachItems(itemsList);
+                    view.attachItem(itemsList);
                 }, throwable -> {
                     throwable.printStackTrace();
                     view.showErrorMessage("Couldn't load items");
@@ -51,7 +55,7 @@ public class ItemsListPresenterImpl implements ItemsListPresenter {
     }
 
     @Override
-    public List<ItemDto> sortItems(List<ItemDto> items, int option) {
+    public List<Item> sortItems(List<Item> items, int option) {
         switch (option){
             case 0:
                 items = sorter.getListByNameAsc(items);

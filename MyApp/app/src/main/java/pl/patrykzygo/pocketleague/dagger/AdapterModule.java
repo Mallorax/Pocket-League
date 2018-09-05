@@ -28,8 +28,8 @@ public class AdapterModule {
 
     @Provides
     @Singleton
-    ItemsListAdapter providesItemsListAdapter(){
-        return new ItemsListAdapter();
+    ItemsListAdapter providesItemsListAdapter(Picasso picasso){
+        return new ItemsListAdapter(picasso);
     }
 
 }

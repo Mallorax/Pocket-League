@@ -2,7 +2,7 @@ package pl.patrykzygo.pocketleague.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RiotResponse {
+public class ChampionsResponse {
 
 	@SerializedName("data")
 	private ChampionData data;
@@ -16,11 +16,11 @@ public class RiotResponse {
 	@SerializedName("version")
 	private String version;
 
-	public void setData(ChampionData championData){
+	public void setChampionData(ChampionData championData){
 		this.data = championData;
 	}
 
-	public ChampionData getData(){
+	public ChampionData getChampionData(){
 		return data;
 	}
 
@@ -51,7 +51,7 @@ public class RiotResponse {
 	@Override
  	public String toString(){
 		return 
-			"RiotResponse{" +
+			"ChampionsResponse{" +
 			"data = '" + data + '\'' + 
 			",format = '" + format + '\'' + 
 			",type = '" + type + '\'' + 

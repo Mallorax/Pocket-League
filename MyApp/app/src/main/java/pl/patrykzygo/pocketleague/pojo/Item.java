@@ -37,6 +37,17 @@ public class Item{
 	@SerializedName("tags")
 	private List<String> tags;
 
+	@SerializedName("id")
+	private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public void setColloq(String colloq){
 		this.colloq = colloq;
 	}

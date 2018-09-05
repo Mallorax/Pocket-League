@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
+import pl.patrykzygo.pocketleague.pojo.Item;
 import pl.patrykzygo.pocketleague.ui.adapters.ItemsListAdapter;
 import pl.patrykzygo.pocketleague.ui.fragments.dialog_fragments.SortDialog;
 
@@ -55,6 +54,11 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
 
         setSupportActionBar(toolbar);
 
+        itemsRecyclerView.setAdapter(adapter);
+        itemsRecyclerView.addItemDecoration(new DividerItemDecoration(itemsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        itemsRecyclerView.setNestedScrollingEnabled(false);
+        adapter.setOnListItemClickListener(this);
+
         itemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         presenter.setView(this);
         presenter.showItems();
@@ -62,13 +66,10 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
     }
 
     @Override
-    public void attachItems(List<ItemDto> items) {
-        adapter.setItemsList(items);
-        adapter.setOnListItemClickListener(this);
+    public void attachItem(Item item) {
+        adapter.addItem(item);
         adapter.notifyDataSetChanged();
-        itemsRecyclerView.setAdapter(adapter);
-        itemsRecyclerView.addItemDecoration(new DividerItemDecoration(itemsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        itemsRecyclerView.setNestedScrollingEnabled(false);
+
     }
 
     @Override
@@ -87,7 +88,7 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
     }
 
     @Override
-    public void onListItemClicked(ItemDto item) {
+    public void onListItemClicked(Item item) {
         Toast.makeText(this, "Item id: " + item.getId(), Toast.LENGTH_LONG).show();
     }
 

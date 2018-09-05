@@ -2,7 +2,7 @@ package pl.patrykzygo.pocketleague.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Response{
+public class ItemsResponse {
 
 	@SerializedName("data")
 	private ItemData data;
@@ -13,11 +13,11 @@ public class Response{
 	@SerializedName("version")
 	private String version;
 
-	public ItemData getData() {
+	public ItemData getItemData() {
 		return data;
 	}
 
-	public void setData(ItemData data) {
+	public void setItemData(ItemData data) {
 		this.data = data;
 	}
 
@@ -40,7 +40,7 @@ public class Response{
 	@Override
  	public String toString(){
 		return 
-			"Response{" + 
+			"ItemsResponse{" +
 			"data = '" + data + '\'' + 
 			",type = '" + type + '\'' + 
 			",version = '" + version + '\'' + 
