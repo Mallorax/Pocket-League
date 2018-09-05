@@ -239,7 +239,7 @@ public class Stats{
 	@Override
  	public String toString(){
 		return 
-			"Stats{" + 
+			"ItemStats{" +
 			"mpregen = '" + mpregen + '\'' + 
 			",attackdamageperlevel = '" + attackdamageperlevel + '\'' + 
 			",mp = '" + mp + '\'' + 

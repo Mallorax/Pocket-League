@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
-public class Data{
+public class ChampionData {
 
 	@SerializedName("championMap")
 	private Map<String, Champion> championsMap;
@@ -19,7 +19,7 @@ public class Data{
 
 	@Override
 	public String toString() {
-		return "Data{" +
+		return "ChampionData{" +
 				"championsMap=" + championsMap +
 				'}';
 	}
