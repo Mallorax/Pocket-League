@@ -15,15 +15,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionActivity;
 import pl.patrykzygo.pocketleague.ui.adapters.ChampionsListAdapter;
 
@@ -60,6 +58,11 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
         setSupportActionBar(toolbar);
 
         championsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setOnChampionClickListener(this);
+        championsRecyclerView.setAdapter(adapter);
+        championsRecyclerView.addItemDecoration(new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        championsRecyclerView.getAdapter().notifyDataSetChanged();
+        championsRecyclerView.setNestedScrollingEnabled(false);
 
         presenter.setView(this);
         presenter.showChampions();
@@ -67,13 +70,8 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
 
     @Override
-    public void attachChampions(List<ChampionDto> champions) {
-        adapter.setChampions(champions);
-        adapter.setOnChampionClickListener(this);
-        championsRecyclerView.setAdapter(adapter);
-        championsRecyclerView.addItemDecoration(new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        championsRecyclerView.getAdapter().notifyDataSetChanged();
-        championsRecyclerView.setNestedScrollingEnabled(false);
+    public void attachChampion (Champion champion) {
+        adapter.addChampion(champion);
     }
 
     @Override
@@ -82,10 +80,10 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     }
 
     @Override
-    public void onChampionClicked(ChampionDto champion) {
+    public void onChampionClicked(Champion champion) {
         Intent i = new Intent(this, ChampionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("id", champion.getId());
+        bundle.putInt("id", Integer.parseInt(champion.getId()));
         i.putExtra("bundle", bundle);
         startActivity(i);
     }

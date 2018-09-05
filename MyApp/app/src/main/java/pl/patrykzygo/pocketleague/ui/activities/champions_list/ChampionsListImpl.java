@@ -3,10 +3,9 @@ package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.CompositeDisposable;
 import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.subscriptions.CompositeSubscription;
 
 
 public class ChampionsListImpl implements ChampionsListPresenter {
@@ -14,7 +13,7 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
     private ChampionsListView view;
     private RiotRepository riotRepository;
-    private CompositeSubscription subscriptions;
+    private CompositeDisposable disposable;
     private BaseSchedulerProvider schedulerProvider;
 
     @Inject
@@ -22,7 +21,7 @@ public class ChampionsListImpl implements ChampionsListPresenter {
                              BaseSchedulerProvider schedulerProvider) {
         this.riotRepository = riotDataRepository;
         this.schedulerProvider = schedulerProvider;
-        this.subscriptions = new CompositeSubscription();
+        this.disposable = new CompositeDisposable();
     }
 
     @Override
@@ -38,11 +37,10 @@ public class ChampionsListImpl implements ChampionsListPresenter {
     }
 
     private void getChampions(){
-        subscriptions.add(riotRepository.requestChampions()
+        disposable.add(riotRepository.requestChampions()
                 .observeOn(schedulerProvider.getUiScheduler())
-                .subscribe((championsList) ->{
-                    view.attachChampions(championsList);
-                }, throwable -> {
+                .subscribe((champion) -> view.attachChampion(champion)
+                , throwable -> {
                     throwable.printStackTrace();
                     view.showErrorMessage("Failed to load the champions");
                 }));

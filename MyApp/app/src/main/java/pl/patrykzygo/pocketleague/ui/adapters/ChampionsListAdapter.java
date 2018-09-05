@@ -8,28 +8,44 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import pl.patrykzygo.pocketleague.R;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 
 
 public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdapter.ChampionsViewHolder> {
 
-    private List<ChampionDto> champions;
-    private List<ChampionDto> championsCopy;
+    private List<Champion> champions;
+    private List<Champion> championsCopy;
     private OnChampionClickListener onChampionClickListener;
+    private Picasso picasso;
+
+
+    @Inject
+    public ChampionsListAdapter(Picasso picasso){
+        this.picasso = picasso;
+        this.champions = new ArrayList<>();
+        this.championsCopy = new ArrayList<>();
+    }
 
     public void setOnChampionClickListener(OnChampionClickListener championClickListener){
         this.onChampionClickListener = championClickListener;
     }
 
-
-    public void setChampions(List<ChampionDto> champions){
+    public void setChampions(List<Champion> champions){
         this.champions = champions;
-        this.championsCopy = new ArrayList<>();
         championsCopy.addAll(champions);
+    }
+
+    public void addChampion(Champion champion){
+        champions.add(champion);
+        championsCopy.add(champion);
     }
 
     public void filter(String text) {
@@ -38,7 +54,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
             champions.addAll(championsCopy);
         } else{
             text = text.toLowerCase();
-            for(ChampionDto champion: championsCopy){
+            for(Champion champion: championsCopy){
                 if(champion.getName().toLowerCase().contains(text) || champion.getTitle().toLowerCase().contains(text)){
                     champions.add(champion);
                 }
@@ -56,10 +72,9 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
     @Override
     public void onBindViewHolder(ChampionsViewHolder holder, int position) {
-        ChampionDto champ = champions.get(position);
+        Champion champ = champions.get(position);
         holder.nameView.setText(champ.getName());
         holder.titleView.setText(champ.getTitle());
-        holder.imageView.setImageBitmap(champ.getImage().getBitmap());
     }
 
 
@@ -70,7 +85,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     }
 
     public interface OnChampionClickListener {
-        void onChampionClicked(ChampionDto champion);
+        void onChampionClicked(Champion champion);
     }
 
     public class ChampionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
