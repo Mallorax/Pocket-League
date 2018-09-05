@@ -5,7 +5,7 @@ public class Constants {
 
     public static final String BASE_CONSTANTS_URL = "http://ddragon.leagueoflegends.com/cdn/";
 
-    public static final String CHAMPIONS_REQUEST = "data/en_US/champion.json";
+    public static final String CHAMPIONS_REQUEST = "data/en_US/";
 
     public static final String VERSION = "8.17.1";
 

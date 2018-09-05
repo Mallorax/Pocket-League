@@ -6,5 +6,5 @@ import android.support.annotation.Nullable;
 public interface ChampionPresenter {
 
     void setView(@Nullable ChampionView view);
-    void presentChampion(int id);
+    void presentChampion(String name);
 }

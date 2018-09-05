@@ -10,7 +10,7 @@ public interface RiotRepository {
 
     Flowable<Champion> requestChampions();
 
-    Flowable<Champion> getChampionById(int id);
+    Flowable<Champion> getChampionByName(String name);
 
 
 }

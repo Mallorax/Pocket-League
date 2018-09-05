@@ -12,10 +12,10 @@ import retrofit2.http.Path;
 
 public interface RiotApi {
 
-    @GET(Constants.VERSION + Constants.CHAMPIONS_REQUEST)
+    @GET(Constants.VERSION + Constants.CHAMPIONS_REQUEST + "champion.json")
     Flowable<RiotResponse> getChampionsList();
 
-    @GET("lol/static-data/v3/champions/{id}?locale=en_US&tags=all&api_key=" +BuildConfig.RIOT_API_KEY)
-    Flowable<Champion> getChampionById(@Path("id") String id);
+    @GET(Constants.VERSION + Constants.CHAMPIONS_REQUEST + "{name}.json")
+    Flowable<RiotResponse> getChampionByName(@Path("name") String name);
 
 }

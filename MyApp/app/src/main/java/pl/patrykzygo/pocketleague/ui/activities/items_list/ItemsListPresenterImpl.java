@@ -2,32 +2,29 @@ package pl.patrykzygo.pocketleague.ui.activities.items_list;
 
 
 import android.support.annotation.Nullable;
-
-import java.util.List;
-
 import javax.inject.Inject;
 
+import io.reactivex.disposables.CompositeDisposable;
+import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.logic.ItemsListSorter;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 public class ItemsListPresenterImpl implements ItemsListPresenter {
 
     private RiotRepository repository;
-    private CompositeSubscription subscription;
+    private CompositeDisposable disposable;
     private ItemsListSorter sorter;
+    private BaseSchedulerProvider schedulerProvider;
 
     @Nullable
     private ItemsListView view;
 
     @Inject
-    public ItemsListPresenterImpl(RiotRepository repository){
+    public ItemsListPresenterImpl(RiotRepository repository, BaseSchedulerProvider schedulerProvider){
         this.repository = repository;
         this.sorter = new ItemsListSorter();
-        this.subscription = new CompositeSubscription();
+        this.schedulerProvider = schedulerProvider;
+        this.disposable = new CompositeDisposable();
     }
 
     @Override
@@ -43,7 +40,7 @@ public class ItemsListPresenterImpl implements ItemsListPresenter {
     }
 
     private void getItems(){
-        subscription.add(repository.getItemsList()
+        disposableadd(repository.getItemsList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((itemsList) -> {
                     view.attachItems(itemsList);

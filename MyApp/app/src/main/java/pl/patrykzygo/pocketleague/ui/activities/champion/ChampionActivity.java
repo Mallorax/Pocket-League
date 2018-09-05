@@ -12,7 +12,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
 import pl.patrykzygo.pocketleague.ui.adapters.ViewPagerAdapter;
@@ -46,13 +46,13 @@ public class ChampionActivity extends AppCompatActivity implements ChampionView{
 
         setSupportActionBar(toolbar);
 
-        presenter.presentChampion(getIntent().getBundleExtra("bundle").getInt("id"));
+        presenter.presentChampion(getIntent().getBundleExtra("bundle").getString("id"));
         tabLayout.setupWithViewPager(viewPager);
     }
 
 
     @Override
-    public void setTabs(ChampionDto champion) {
+    public void setTabs(Champion champion) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         BaseChampionFragment overViewTab = new ChampionOverviewTab();

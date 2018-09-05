@@ -83,7 +83,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     public void onChampionClicked(Champion champion) {
         Intent i = new Intent(this, ChampionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("id", Integer.parseInt(champion.getId()));
+        bundle.putString("id", champion.getName());
         i.putExtra("bundle", bundle);
         startActivity(i);
     }

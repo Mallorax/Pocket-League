@@ -22,12 +22,13 @@ public class RiotDataRepository implements RiotRepository {
     @Override
     public Flowable<Champion> requestChampions() {
         return riotApi.getChampionsList()
-                .flatMapIterable(response -> response.getData().getChampionsMap().values())
-                .map(champion -> dataParser.parseThroughAll(champion));
+                .flatMapIterable(response -> response.getData().getChampionsMap().values());
     }
 
     @Override
-    public Flowable<Champion> getChampionById(int id) {
-        return null;
+    public Flowable<Champion> getChampionByName(String name) {
+        return riotApi.getChampionByName(name)
+                .flatMap(response -> Flowable.just(response.getData().getChampionsMap().get(name)))
+                .map(champion -> dataParser.parseThroughAll(champion));
     }
 }
