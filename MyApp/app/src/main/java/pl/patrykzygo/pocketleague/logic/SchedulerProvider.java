@@ -1,6 +1,7 @@
 package pl.patrykzygo.pocketleague.logic;
 
 import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class SchedulerProvider implements BaseSchedulerProvider {
@@ -17,6 +18,6 @@ public class SchedulerProvider implements BaseSchedulerProvider {
 
     @Override
     public Scheduler getUiScheduler() {
-        return Schedulers.trampoline();
+        return AndroidSchedulers.mainThread();
     }
 }

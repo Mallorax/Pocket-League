@@ -20,7 +20,6 @@ import pl.patrykzygo.pocketleague.pojo.Item;
 public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.ItemsListViewHolder> {
 
     private List<Item> itemsList;
-    private List<Item> itemsListCopy;
     private OnListItemClickedListener listener;
     private Picasso picasso;
 
@@ -30,13 +29,10 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
 
     public void addItem(Item item){
         itemsList.add(item);
-        itemsListCopy.add(item);
     }
 
     public void setItemsList(List<Item> itemsList){
         this.itemsList = itemsList;
-        this.itemsListCopy = new ArrayList<>();
-        itemsListCopy.addAll(itemsList);
     }
 
     public List<Item> getItemsList(){
@@ -46,21 +42,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
     public void setOnListItemClickListener(OnListItemClickedListener listener){
         this.listener = listener;
 
-    }
-
-    public void filter(String text) {
-        itemsList.clear();
-        if(text.isEmpty()){
-            itemsList.addAll(itemsListCopy);
-        } else{
-            text = text.toLowerCase();
-            for(Item champion: itemsListCopy){
-                if(champion.getName().toLowerCase().contains(text)){
-                    itemsList.add(champion);
-                }
-            }
-        }
-        notifyDataSetChanged();
     }
 
     @Override

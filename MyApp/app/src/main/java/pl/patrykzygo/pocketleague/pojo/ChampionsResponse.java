@@ -2,10 +2,12 @@ package pl.patrykzygo.pocketleague.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Map;
+
 public class ChampionsResponse {
 
 	@SerializedName("data")
-	private ChampionData data;
+	private Map<String, Champion> data;
 
 	@SerializedName("format")
 	private String format;
@@ -16,12 +18,12 @@ public class ChampionsResponse {
 	@SerializedName("version")
 	private String version;
 
-	public void setChampionData(ChampionData championData){
-		this.data = championData;
+	public Map<String, Champion> getData() {
+		return data;
 	}
 
-	public ChampionData getChampionData(){
-		return data;
+	public void setData(Map<String, Champion> data) {
+		this.data = data;
 	}
 
 	public void setFormat(String format){
@@ -48,14 +50,5 @@ public class ChampionsResponse {
 		return version;
 	}
 
-	@Override
- 	public String toString(){
-		return 
-			"ChampionsResponse{" +
-			"data = '" + data + '\'' + 
-			",format = '" + format + '\'' + 
-			",type = '" + type + '\'' + 
-			",version = '" + version + '\'' + 
-			"}";
-		}
+
 }

@@ -7,5 +7,6 @@ public interface ChampionsListPresenter {
 
     void setView(@Nullable ChampionsListView view);
     void showChampions();
+    void stop();
 
 }

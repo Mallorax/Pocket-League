@@ -104,13 +104,11 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
 
     @Override
     public boolean onQueryTextChange(String query) {
-        adapter.filter(query);
         return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        adapter.filter(query);
         return false;
     }
 

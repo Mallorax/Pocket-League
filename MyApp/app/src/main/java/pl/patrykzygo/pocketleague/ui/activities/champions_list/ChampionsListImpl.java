@@ -1,9 +1,14 @@
 package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Function;
+import io.reactivex.subscribers.DisposableSubscriber;
+import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
 import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
 
@@ -31,18 +36,40 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
     @Override
     public void showChampions() {
-        view.showLoading();
         getChampions();
-        view.hideLoading();
     }
 
-    private void getChampions(){
+    @Override
+    public void stop() {
+        disposable.clear();
+    }
+
+    private void getChampions() {
         disposable.add(riotRepository.requestChampions()
                 .observeOn(schedulerProvider.getUiScheduler())
-                .subscribe((champion) -> view.attachChampion(champion)
-                , throwable -> {
-                    throwable.printStackTrace();
-                    view.showErrorMessage("Failed to load the champions");
+                .startWith(ChampionsViewModel.loading())
+                .onErrorReturn(throwable -> ChampionsViewModel.error(throwable.getMessage()))
+                .subscribeWith(new DisposableSubscriber<ChampionsViewModel>() {
+                    @Override
+                    public void onNext(ChampionsViewModel championsViewModel) {
+                        if (championsViewModel.hasError()) {
+                            view.showErrorMessage(championsViewModel.getErrorMessage());
+                        } else if (championsViewModel.isLoading()) {
+                            view.showLoading();
+                        } else {
+                            view.attachChampions(championsViewModel.getChampionsList());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.d("ERROR", t.getMessage() + " " + t.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 }));
     }
 

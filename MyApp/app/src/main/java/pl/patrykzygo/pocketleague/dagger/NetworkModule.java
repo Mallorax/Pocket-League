@@ -8,15 +8,16 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import pl.patrykzygo.pocketleague.app.Constants;
 import pl.patrykzygo.pocketleague.error.ErrorInterceptor;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.schedulers.Schedulers;
 
 
 @Module
@@ -51,8 +52,7 @@ public class NetworkModule {
                 .baseUrl(baseUrl)
                 .client(client)
                 .addConverterFactory(converter)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory
-                        .createWithScheduler(Schedulers.newThread()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build();
     }
 

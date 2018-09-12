@@ -3,6 +3,7 @@ package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,7 +41,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     RecyclerView championsRecyclerView;
 
     @BindView(R.id.list_activity_progressBar)
-    ProgressBar progressBar;
+    ContentLoadingProgressBar progressBar;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -57,21 +60,35 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
         setSupportActionBar(toolbar);
 
-        championsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setOnChampionClickListener(this);
-        championsRecyclerView.setAdapter(adapter);
-        championsRecyclerView.addItemDecoration(new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        championsRecyclerView.getAdapter().notifyDataSetChanged();
-        championsRecyclerView.setNestedScrollingEnabled(false);
-
         presenter.setView(this);
-        presenter.showChampions();
     }
 
+    @Override
+    protected void onStart() {
+        presenter.showChampions();
+        super.onStart();
+    }
 
     @Override
-    public void attachChampion (Champion champion) {
-        adapter.addChampion(champion);
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    public void attachChampions (List<Champion> champions) {
+        progressBar.hide();
+        championsRecyclerView.setVisibility(View.VISIBLE);
+        adapter.setOnChampionClickListener(this);
+        adapter.setChampions(champions);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        championsRecyclerView.setLayoutManager(layoutManager);
+        championsRecyclerView.setAdapter(adapter);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        championsRecyclerView.addItemDecoration(itemDecoration);
+        championsRecyclerView.setNestedScrollingEnabled(false);
+
     }
 
     @Override
@@ -88,14 +105,10 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
         startActivity(i);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.setView(null);
-    }
 
     @Override
     public void showLoading() {
+        progressBar.show();
         progressBar.setVisibility(View.VISIBLE);
     }
 
@@ -120,13 +133,11 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public boolean onQueryTextChange(String query) {
-        adapter.filter(query);
         return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        adapter.filter(query);
         return false;
     }
 

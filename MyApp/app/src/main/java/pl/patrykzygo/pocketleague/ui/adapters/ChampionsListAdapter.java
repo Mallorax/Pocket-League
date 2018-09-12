@@ -16,6 +16,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.patrykzygo.pocketleague.R;
+import pl.patrykzygo.pocketleague.app.Constants;
 import pl.patrykzygo.pocketleague.pojo.Champion;
 
 
@@ -75,6 +76,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
         Champion champ = champions.get(position);
         holder.nameView.setText(champ.getName());
         holder.titleView.setText(champ.getTitle());
+        picasso.load(Constants.BASE_CONSTANTS_URL + Constants.VERSION + "/img/champion/" + champ.getImage().getFull()).into(holder.imageView);
     }
 
 

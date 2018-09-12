@@ -2,10 +2,16 @@ package pl.patrykzygo.pocketleague.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+import java.util.Map;
+
 public class ItemsResponse {
 
-	@SerializedName("data")
-	private ItemData data;
+	@SerializedName("tree")
+	private List<TreeItem> tree;
+
+	@SerializedName("itemMap")
+	private Map<String, Item> itemMap;
 
 	@SerializedName("type")
 	private String type;
@@ -13,12 +19,20 @@ public class ItemsResponse {
 	@SerializedName("version")
 	private String version;
 
-	public ItemData getItemData() {
-		return data;
+	public List<TreeItem> getTree() {
+		return tree;
 	}
 
-	public void setItemData(ItemData data) {
-		this.data = data;
+	public void setTree(List<TreeItem> tree) {
+		this.tree = tree;
+	}
+
+	public Map<String, Item> getItemMap() {
+		return itemMap;
+	}
+
+	public void setItemMap(Map<String, Item> itemMap) {
+		this.itemMap = itemMap;
 	}
 
 	public void setType(String type){
@@ -37,13 +51,4 @@ public class ItemsResponse {
 		return version;
 	}
 
-	@Override
- 	public String toString(){
-		return 
-			"ItemsResponse{" +
-			"data = '" + data + '\'' + 
-			",type = '" + type + '\'' + 
-			",version = '" + version + '\'' + 
-			"}";
-		}
 }
