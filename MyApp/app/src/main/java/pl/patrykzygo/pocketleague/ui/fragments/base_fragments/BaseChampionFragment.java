@@ -12,7 +12,7 @@ import pl.patrykzygo.pocketleague.pojo.Champion;
 
 public abstract class BaseChampionFragment extends Fragment {
 
-    @NonNull
+
     private Champion champion;
 
     @Override
@@ -22,7 +22,7 @@ public abstract class BaseChampionFragment extends Fragment {
     }
 
 
-    public void setChampion(@NonNull Champion champion){
+    public void setChampion(Champion champion){
         this.champion = champion;
     }
 

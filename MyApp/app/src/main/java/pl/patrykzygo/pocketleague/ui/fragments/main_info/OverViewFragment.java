@@ -49,7 +49,7 @@ public class OverViewFragment extends BaseChampionFragment{
     }
 
     public void attachInfo(){
-        picasso.load(Constants.BASE_CONSTANTS_URL + Constants.VERSION + "/img/champion/" + getChampion().getName()).into(championIcon);
+        picasso.load(Constants.BASE_CONSTANTS_URL + Constants.VERSION + "/img/champion/" + getChampion().getImage().getFull()).into((championIcon));
         championName.setText(getChampion().getName());
         championTitle.setText(getChampion().getTitle());
     }

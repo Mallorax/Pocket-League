@@ -14,7 +14,7 @@ public interface RiotApi {
     @GET(Constants.VERSION + Constants.BASE_STATIC_REQUEST + "champion.json")
     Flowable<ChampionsResponse> getChampionsList();
 
-    @GET(Constants.VERSION + Constants.BASE_STATIC_REQUEST + "{name}.json")
+    @GET(Constants.VERSION + Constants.BASE_STATIC_REQUEST + Constants.SINGLE_CHAMPION_REQUEST + "{name}.json")
     Flowable<ChampionsResponse> getChampionByName(@Path("name") String name);
 
     @GET(Constants.VERSION + Constants.BASE_STATIC_REQUEST + "item.json")

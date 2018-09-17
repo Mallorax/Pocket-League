@@ -7,4 +7,5 @@ public interface ChampionPresenter {
 
     void setView(@Nullable ChampionView view);
     void presentChampion(String name);
+    void stop();
 }

@@ -46,10 +46,21 @@ public class ChampionActivity extends AppCompatActivity implements ChampionView{
 
         setSupportActionBar(toolbar);
 
-        presenter.presentChampion(getIntent().getBundleExtra("bundle").getString("id"));
+
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.presentChampion(getIntent().getBundleExtra("bundle").getString("id"));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
 
     @Override
     public void setTabs(Champion champion) {
