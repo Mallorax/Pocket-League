@@ -3,9 +3,8 @@ package pl.patrykzygo.pocketleague.ui.activities.champion;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subscribers.DisposableSubscriber;
-import pl.patrykzygo.pocketleague.ViewModels.ChampionViewModel;
-import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
 import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
 
 
@@ -36,22 +35,21 @@ public class ChampionPresenterImpl implements ChampionPresenter {
     public void presentChampion(String name) {
         view.showLoading();
         getChampion(name);
-        view.hideLoading();
     }
 
     private void getChampion(String name) {
         disposable.add(repository.getChampionByName(name)
                 .observeOn(schedulerProvider.getUiScheduler())
-                .onErrorReturn(throwable -> ChampionViewModel.error(throwable.getMessage()))
-                .subscribeWith(new DisposableSubscriber<ChampionViewModel>() {
+                .subscribeWith(new DisposableSubscriber<Champion>() {
                     @Override
-                    public void onNext(ChampionViewModel championViewModel) {
-                        view.setTabs(championViewModel.getChampion());
+                    public void onNext(Champion champion) {
+                        view.setTabs(champion);
                     }
 
                     @Override
                     public void onError(Throwable t) {
                         view.showErrorMessage(t.getMessage());
+                        t.printStackTrace();
                     }
 
                     @Override

@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/champion_passive"
+        android:textStyle="bold"
+        android:text="@string/champion_passive"/>
 
     <LinearLayout
         android:layout_margin="3dp"
@@ -16,6 +23,7 @@
             android:id="@+id/passive_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -35,6 +43,14 @@
         android:layout_height="2dp"
         android:background="@color/dividerColor" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/champion_Q"
+        android:text="@string/champion_Q"/>
+
     <LinearLayout
         android:layout_margin="3dp"
         android:layout_width="wrap_content"
@@ -45,6 +61,7 @@
             android:id="@+id/q_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -64,6 +81,14 @@
         android:layout_height="2dp"
         android:background="@color/dividerColor" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:id="@+id/champion_W"
+        android:text="@string/champion_W"/>
+
     <LinearLayout
         android:layout_margin="3dp"
         android:layout_width="wrap_content"
@@ -74,6 +99,7 @@
             android:id="@+id/w_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -93,6 +119,14 @@
         android:layout_height="2dp"
         android:background="@color/dividerColor" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/champion_E"
+        android:text="@string/champion_E"/>
+
     <LinearLayout
         android:layout_margin="3dp"
         android:layout_width="wrap_content"
@@ -103,6 +137,7 @@
             android:id="@+id/e_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -121,6 +156,14 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/dividerColor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/champion_R"
+        android:text="@string/champion_R"/>
 
     <LinearLayout
         android:layout_margin="3dp"

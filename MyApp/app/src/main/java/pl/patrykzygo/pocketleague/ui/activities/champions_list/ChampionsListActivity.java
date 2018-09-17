@@ -65,8 +65,8 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     protected void onStart() {
-        presenter.showChampions();
         super.onStart();
+        presenter.showChampions();
     }
 
     @Override

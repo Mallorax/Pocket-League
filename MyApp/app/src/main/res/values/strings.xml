@@ -34,6 +34,11 @@
     <string name="movement">Movement</string>
     <string name="boots">Boots</string>
     <string name="other_movement">Other Movement</string>
+    <string name="champion_passive">Passive</string>
+    <string name="champion_Q">Q</string>
+    <string name="champion_E">E</string>
+    <string name="champion_W">W</string>
+    <string name="champion_R">R</string>
     <array name="sort_dialog_positions">
         <item>By name (A-Z)</item>
         <item>By name (Z-A)</item>

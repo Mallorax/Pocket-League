@@ -1,6 +1,8 @@
 package pl.patrykzygo.pocketleague.dagger;
 
 
+import com.google.gson.Gson;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
@@ -27,7 +29,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     Converter.Factory provideGsonConverter(){
-        return GsonConverterFactory.create();
+        return GsonConverterFactory .create();
     }
 
     @Provides

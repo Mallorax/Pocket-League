@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import pl.patrykzygo.pocketleague.ViewModels.ChampionViewModel;
 import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
 import pl.patrykzygo.pocketleague.logic.ChampionDataParser;
 import pl.patrykzygo.pocketleague.network.RiotApi;
@@ -42,12 +41,12 @@ public class RiotDataRepository implements RiotRepository {
     }
 
     @Override
-    public Flowable<ChampionViewModel> getChampionByName(String name) {
+    public Flowable<Champion> getChampionByName(String name) {
         return riotApi.getChampionByName(name)
-                .flatMap((Function<ChampionsResponse, Publisher<ChampionViewModel>>) championsResponse -> {
+                .flatMap( championsResponse -> {
                     Map.Entry<String, Champion> championEntry = championsResponse.getData().entrySet().iterator().next();
                     Champion champion = dataParser.parseThroughAll(championEntry.getValue());
-                    return Flowable.just(ChampionViewModel.succes(champion));
+                    return Flowable.just(champion);
         }).subscribeOn(Schedulers.io());
     }
 

@@ -57,9 +57,26 @@ public class ChampionAbilitiesFragment extends BaseChampionFragment {
     @BindView(R.id.r_description)
     TextView rDescription;
 
+    @BindView(R.id.champion_passive)
+    TextView championPassiveText;
+
+    @BindView(R.id.champion_Q)
+    TextView championQText;
+
+    @BindView(R.id.champion_W)
+    TextView championWText;
+
+    @BindView(R.id.champion_E)
+    TextView championEText;
+
+    @BindView(R.id.champion_R)
+    TextView championRText;
+
+
     @Inject
     Picasso picasso;
 
+    //TODO Clean up the layout file!!!
 
     @Override
     public void onAttach(Context context) {
@@ -79,16 +96,22 @@ public class ChampionAbilitiesFragment extends BaseChampionFragment {
 
     public void attachInfo(){
         List<SpellsItem> spellsList = getChampion().getSpells();
-        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +getChampion().getPassive().getImage()+ ".png").into(passiveImage);
-        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(0).getImage()+ ".png").into(qImage);
-        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(1).getImage()+ ".png").into(wImage);
-        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(2).getImage()+ ".png").into(eImage);
-        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(3).getImage()+ ".png").into(rImage);
+        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/passive/" +getChampion().getPassive().getImage().getFull()).into(passiveImage);
+        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(0).getImage().getFull()).into(qImage);
+        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(1).getImage().getFull()).into(wImage);
+        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(2).getImage().getFull()).into(eImage);
+        picasso.load(Constants.BASE_CONSTANTS_URL+ Constants.VERSION + "/img/spell/" +spellsList.get(3).getImage().getFull()).into(rImage);
 
         passiveDescription.setText(getChampion().getPassive().getDescription());
         qDescription.setText(spellsList.get(0).getDescription());
         wDescription.setText(spellsList.get(1).getDescription());
         eDescription.setText(spellsList.get(2).getDescription());
         rDescription.setText(spellsList.get(3).getDescription());
+
+        championPassiveText.append(" - " + getChampion().getPassive().getName());
+        championQText.append(" - " + spellsList.get(0).getName());
+        championWText.append(" - " + spellsList.get(1).getName());
+        championEText.append(" - " + spellsList.get(2).getName());
+        championRText.append(" - " + spellsList.get(3).getName());
     }
 }

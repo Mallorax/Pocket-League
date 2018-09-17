@@ -38,9 +38,6 @@ public class SpellsItem{
 	@SerializedName("maxrank")
 	private int maxrank;
 
-	@SerializedName("effect")
-	private List<Object> effect;
-
 	@SerializedName("costType")
 	private String costType;
 
@@ -48,7 +45,7 @@ public class SpellsItem{
 	private String name;
 
 	@SerializedName("cooldown")
-	private List<Integer> cooldown;
+	private List<Double> cooldown;
 
 	@SerializedName("id")
 	private String id;
@@ -56,11 +53,7 @@ public class SpellsItem{
 	@SerializedName("costBurn")
 	private String costBurn;
 
-	@SerializedName("vars")
-	private List<VarsItem> vars;
 
-	@SerializedName("effectBurn")
-	private List<Object> effectBurn;
 
 	public void setCooldownBurn(String cooldownBurn){
 		this.cooldownBurn = cooldownBurn;
@@ -150,13 +143,7 @@ public class SpellsItem{
 		return maxrank;
 	}
 
-	public void setEffect(List<Object> effect){
-		this.effect = effect;
-	}
 
-	public List<Object> getEffect(){
-		return effect;
-	}
 
 	public void setCostType(String costType){
 		this.costType = costType;
@@ -174,11 +161,11 @@ public class SpellsItem{
 		return name;
 	}
 
-	public void setCooldown(List<Integer> cooldown){
+	public void setCooldown(List<Double> cooldown){
 		this.cooldown = cooldown;
 	}
 
-	public List<Integer> getCooldown(){
+	public List<Double> getCooldown(){
 		return cooldown;
 	}
 
@@ -198,21 +185,6 @@ public class SpellsItem{
 		return costBurn;
 	}
 
-	public void setVars(List<VarsItem> vars){
-		this.vars = vars;
-	}
-
-	public List<VarsItem> getVars(){
-		return vars;
-	}
-
-	public void setEffectBurn(List<Object> effectBurn){
-		this.effectBurn = effectBurn;
-	}
-
-	public List<Object> getEffectBurn(){
-		return effectBurn;
-	}
 
 	@Override
  	public String toString(){
@@ -228,15 +200,12 @@ public class SpellsItem{
 			",tooltip = '" + tooltip + '\'' + 
 			",description = '" + description + '\'' + 
 			",range = '" + range + '\'' + 
-			",maxrank = '" + maxrank + '\'' + 
-			",effect = '" + effect + '\'' + 
+			",maxrank = '" + maxrank + '\'' +
 			",costType = '" + costType + '\'' + 
 			",name = '" + name + '\'' + 
 			",cooldown = '" + cooldown + '\'' + 
 			",id = '" + id + '\'' + 
-			",costBurn = '" + costBurn + '\'' + 
-			",vars = '" + vars + '\'' + 
-			",effectBurn = '" + effectBurn + '\'' + 
+			",costBurn = '" + costBurn + '\'' +
 			"}";
 		}
 }
