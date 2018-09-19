@@ -8,6 +8,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.subscribers.DisposableSubscriber;
+import pl.patrykzygo.pocketleague.ViewModels.ItemsViewModel;
 import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.logic.ItemsListSorter;
 import pl.patrykzygo.pocketleague.pojo.Item;
@@ -38,20 +40,45 @@ public class ItemsListPresenterImpl implements ItemsListPresenter {
 
     @Override
     public void showItems() {
-        view.showLoading();
         getItems();
-        view.hideLoading();
     }
 
     private void getItems(){
         disposable.add(repository.getItems()
                 .observeOn(schedulerProvider.getUiScheduler())
-                .subscribe((itemsList) -> {
-                    view.attachItem(itemsList);
-                }, throwable -> {
+                .startWith(ItemsViewModel.loading())
+                .onErrorReturn(throwable -> {
                     throwable.printStackTrace();
-                    view.showErrorMessage("Couldn't load items");
+                    return ItemsViewModel.error(throwable.getMessage());
+                    })
+                .subscribeWith(new DisposableSubscriber<ItemsViewModel>(){
+                    @Override
+                    public void onNext(ItemsViewModel itemsViewModel) {
+                        if (itemsViewModel.hasError()){
+                            view.showErrorMessage(itemsViewModel.getErrorMessage());
+                        }else if (itemsViewModel.isLoading()){
+                            view.showLoading();
+                        }else {
+                            List<Item> itemsList = sorter.getListByPriceAsc(itemsViewModel.getItems());
+                            view.attachItems(itemsList);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        view.hideLoading();
+                    }
                 }));
+    }
+
+    @Override
+    public void stop() {
+        disposable.clear();
     }
 
     @Override

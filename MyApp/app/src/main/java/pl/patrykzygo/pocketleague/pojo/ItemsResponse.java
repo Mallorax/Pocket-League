@@ -10,14 +10,12 @@ public class ItemsResponse {
 	@SerializedName("tree")
 	private List<TreeItem> tree;
 
-	@SerializedName("itemMap")
-	private Map<String, Item> itemMap;
+	@SerializedName("data")
+	private Map<String, Item> data;
 
 	@SerializedName("type")
 	private String type;
 
-	@SerializedName("version")
-	private String version;
 
 	public List<TreeItem> getTree() {
 		return tree;
@@ -27,12 +25,12 @@ public class ItemsResponse {
 		this.tree = tree;
 	}
 
-	public Map<String, Item> getItemMap() {
-		return itemMap;
+	public Map<String, Item> getItemDataMap() {
+		return data;
 	}
 
-	public void setItemMap(Map<String, Item> itemMap) {
-		this.itemMap = itemMap;
+	public void setItemDataMap(Map<String, Item> data) {
+		this.data = data;
 	}
 
 	public void setType(String type){
@@ -41,14 +39,6 @@ public class ItemsResponse {
 
 	public String getType(){
 		return type;
-	}
-
-	public void setVersion(String version){
-		this.version = version;
-	}
-
-	public String getVersion(){
-		return version;
 	}
 
 }

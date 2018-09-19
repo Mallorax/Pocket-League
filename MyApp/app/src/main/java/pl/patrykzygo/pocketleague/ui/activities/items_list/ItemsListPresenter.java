@@ -9,6 +9,7 @@ import pl.patrykzygo.pocketleague.pojo.Item;
 
 public interface ItemsListPresenter {
 
+    void stop();
     void setView(@Nullable ItemsListView view);
     void showItems();
     List<Item> sortItems(List<Item> items, int option);

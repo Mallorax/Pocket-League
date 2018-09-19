@@ -77,7 +77,6 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public void attachChampions (List<Champion> champions) {
-        progressBar.hide();
         championsRecyclerView.setVisibility(View.VISIBLE);
         adapter.setOnChampionClickListener(this);
         adapter.setChampions(champions);
@@ -114,7 +113,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.hide();
     }
 
     @Override

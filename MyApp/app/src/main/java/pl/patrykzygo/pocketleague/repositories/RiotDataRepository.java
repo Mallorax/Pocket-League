@@ -12,11 +12,13 @@ import io.reactivex.Flowable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
+import pl.patrykzygo.pocketleague.ViewModels.ItemsViewModel;
 import pl.patrykzygo.pocketleague.logic.ChampionDataParser;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import pl.patrykzygo.pocketleague.pojo.Champion;
 import pl.patrykzygo.pocketleague.pojo.ChampionsResponse;
 import pl.patrykzygo.pocketleague.pojo.Item;
+import pl.patrykzygo.pocketleague.pojo.ItemsResponse;
 
 public class RiotDataRepository implements RiotRepository {
 
@@ -51,11 +53,16 @@ public class RiotDataRepository implements RiotRepository {
     }
 
     @Override
-    public Flowable<Item> getItems() {
+    public Flowable<ItemsViewModel> getItems() {
         return riotApi.getItems()
-                .flatMapIterable(itemsResponse -> {
-                    itemsResponse.getItemMap().forEach((k, v) -> v.setId(k));
-                    return itemsResponse.getItemMap().values();
-                });
+                .flatMap(
+                        (Function<ItemsResponse, Publisher<ItemsViewModel>>) itemsResponse ->{
+                            List<Item> itemsList = new ArrayList<>();
+                            for (Map.Entry<String, Item> itemEntry : itemsResponse.getItemDataMap().entrySet() ){
+                                itemEntry.getValue().setId(itemEntry.getKey());
+                                itemsList.add(itemEntry.getValue());
+                            }
+                            return Flowable.just(ItemsViewModel.succes(itemsList));
+                }).subscribeOn(Schedulers.io());
     }
 }
