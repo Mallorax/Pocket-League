@@ -19,10 +19,10 @@ public class ChampionDataParser {
     }
 
     public Champion setChampionAttackSpeed(Champion champion){
-        double as = 0.625 / (1 + champion.getStats().getAttackspeedoffset());
-        DecimalFormat format = new DecimalFormat("#.###");
-        double attackSpeed = Double.valueOf(format.format(as));
-        champion.getStats().setAttackspeed(attackSpeed);
+        DecimalFormat df = new DecimalFormat("#.###");
+        double as = (0.625d) / (1.0d + champion.getStats().getAttackspeedoffset());
+
+        champion.getStats().setAttackspeed(Double.parseDouble(df.format(as)));
         return champion;
     }
 
@@ -34,15 +34,10 @@ public class ChampionDataParser {
 
     public Champion parseAbilitiesString(Champion champion){
         String passive = champion.getPassive().getDescription().replace("<br>", "\n");
-        String q = champion.getSpells().get(0).getDescription().replace("<br>", "\n");
-        String w = champion.getSpells().get(1).getDescription().replace("<br>", "\n");
-        String e = champion.getSpells().get(2).getDescription().replace("<br>", "\n");
-        String r = champion.getSpells().get(3).getDescription().replace("<br>", "\n");
         champion.getPassive().setDescription(passive);
-        champion.getSpells().get(0).setDescription(q);
-        champion.getSpells().get(1).setDescription(w);
-        champion.getSpells().get(2).setDescription(e);
-        champion.getSpells().get(3).setDescription(r);
+        for(int i = 0; i < 4; i++){
+            champion.getSpells().get(i).setDescription( champion.getSpells().get(i).getDescription().replace("<br>", "\n"));
+        }
         return champion;
     }
 

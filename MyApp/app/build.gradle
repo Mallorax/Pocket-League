@@ -4,7 +4,7 @@ def RIOT_API_KEY = '"' + RiotAPIKey + '"' ?: '"Define Riot API key"'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "pl.patrykzygo.rito_test"
