@@ -129,17 +129,10 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     }
 
 
-    //TODO don't know if code below should be inside activity, have to check it out
-    //TODO you can't see filtered positions after deleting text, fix that fast
-
     @Override
     public boolean onQueryTextChange(String query) {
-<<<<<<< Updated upstream
-        return true;
-=======
         adapter.getFilter().filter(query);
         return false;
->>>>>>> Stashed changes
     }
 
     @Override
