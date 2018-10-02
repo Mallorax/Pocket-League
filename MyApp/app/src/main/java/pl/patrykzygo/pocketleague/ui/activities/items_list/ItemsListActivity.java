@@ -100,6 +100,7 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
         progressBar.hide();
     }
 
+
     @Override
     public void onListItemClicked(Item item) {
         Toast.makeText(this, "Item id: " + item.getId(), Toast.LENGTH_LONG).show();

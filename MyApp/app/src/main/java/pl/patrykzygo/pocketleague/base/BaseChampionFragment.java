@@ -1,4 +1,4 @@
-package pl.patrykzygo.pocketleague.ui.fragments.base_fragments;
+package pl.patrykzygo.pocketleague.base;
 
 
 import android.os.Bundle;

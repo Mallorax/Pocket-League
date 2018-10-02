@@ -1,11 +1,9 @@
 package pl.patrykzygo.pocketleague.ui.activities.champion;
 
 
-import android.support.annotation.Nullable;
+import pl.patrykzygo.pocketleague.base.BasePresenter;
 
-public interface ChampionPresenter {
+public interface ChampionPresenter extends BasePresenter<ChampionView> {
 
-    void setView(@Nullable ChampionView view);
     void presentChampion(String name);
-    void stop();
 }

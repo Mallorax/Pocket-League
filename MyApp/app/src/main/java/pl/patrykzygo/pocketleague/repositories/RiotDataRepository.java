@@ -13,6 +13,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
 import pl.patrykzygo.pocketleague.ViewModels.ItemsViewModel;
+import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.logic.ChampionDataParser;
 import pl.patrykzygo.pocketleague.network.RiotApi;
 import pl.patrykzygo.pocketleague.pojo.Champion;
@@ -25,11 +26,13 @@ public class RiotDataRepository implements RiotRepository {
 
     private RiotApi riotApi;
     private ChampionDataParser dataParser;
+    private BaseSchedulerProvider provider;
 
     @Inject
-    public RiotDataRepository(RiotApi riotApi, ChampionDataParser dataParser){
+    public RiotDataRepository(RiotApi riotApi, ChampionDataParser dataParser, BaseSchedulerProvider provider ){
         this.riotApi = riotApi;
         this.dataParser = dataParser;
+        this.provider = provider;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class RiotDataRepository implements RiotRepository {
                         (Function<ChampionsResponse, Publisher<ChampionsViewModel>>) championsResponse -> {
                             List<Champion> champions = new ArrayList<>(championsResponse.getData().values());
                             return Flowable.just(ChampionsViewModel.succes(champions));
-                        }).subscribeOn(Schedulers.io());
+                        }).subscribeOn(provider.getIOScheduler());
     }
 
     @Override
@@ -49,7 +52,7 @@ public class RiotDataRepository implements RiotRepository {
                     Map.Entry<String, Champion> championEntry = championsResponse.getData().entrySet().iterator().next();
                     Champion champion = dataParser.parseThroughAll(championEntry.getValue());
                     return Flowable.just(champion);
-        }).subscribeOn(Schedulers.io());
+        }).subscribeOn(provider.getIOScheduler());
     }
 
     @Override
@@ -63,6 +66,6 @@ public class RiotDataRepository implements RiotRepository {
                                 itemsList.add(itemEntry.getValue());
                             }
                             return Flowable.just(ItemsViewModel.succes(itemsList));
-                }).subscribeOn(Schedulers.io());
+                }).subscribeOn(provider.getIOScheduler());
     }
 }

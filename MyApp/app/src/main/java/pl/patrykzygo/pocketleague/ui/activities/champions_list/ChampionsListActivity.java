@@ -132,6 +132,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public boolean onQueryTextChange(String query) {
+        adapter.getFilter().filter(query);
         return true;
     }
 

@@ -8,12 +8,12 @@ public class SchedulerProvider implements BaseSchedulerProvider {
 
     @Override
     public Scheduler getIOScheduler() {
-        return Schedulers.trampoline();
+        return Schedulers.io();
     }
 
     @Override
     public Scheduler getComputerScheduler() {
-        return Schedulers.trampoline();
+        return Schedulers.computation();
     }
 
     @Override
