@@ -16,7 +16,7 @@ import pl.patrykzygo.pocketleague.pojo.Champion;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
 import pl.patrykzygo.pocketleague.ui.adapters.ViewPagerAdapter;
-import pl.patrykzygo.pocketleague.ui.fragments.base_fragments.BaseChampionFragment;
+import pl.patrykzygo.pocketleague.base.BaseChampionFragment;
 import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.abilities_tab.ChampionAbilitiesTab;
 import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.lore_tab.ChampionLoreTab;
 import pl.patrykzygo.pocketleague.ui.fragments.tabs_fragments.overview_tab.ChampionOverviewTab;

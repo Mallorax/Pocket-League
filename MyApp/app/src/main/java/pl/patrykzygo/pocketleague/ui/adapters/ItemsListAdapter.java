@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +19,7 @@ import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.Constants;
 import pl.patrykzygo.pocketleague.pojo.Item;
 
-public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.ItemsListViewHolder> {
+public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.ItemsListViewHolder> implements Filterable {
 
     private List<Item> itemsList;
     private OnListItemClickedListener listener;
@@ -42,6 +44,11 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
     public void setOnListItemClickListener(OnListItemClickedListener listener){
         this.listener = listener;
 
+    }
+
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 
     @Override

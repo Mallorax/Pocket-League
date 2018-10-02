@@ -1,5 +1,7 @@
 package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -119,9 +121,9 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
-
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(this);
         return true;
     }
@@ -132,11 +134,17 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     public boolean onQueryTextChange(String query) {
+<<<<<<< Updated upstream
         return true;
+=======
+        adapter.getFilter().filter(query);
+        return false;
+>>>>>>> Stashed changes
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        adapter.getFilter().filter(query);
         return false;
     }
 
