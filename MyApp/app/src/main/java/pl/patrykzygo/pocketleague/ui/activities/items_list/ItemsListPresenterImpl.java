@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 import pl.patrykzygo.pocketleague.ViewModels.ItemsViewModel;
+import pl.patrykzygo.pocketleague.base.BaseView;
 import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.logic.ItemsListSorter;
 import pl.patrykzygo.pocketleague.pojo.Item;
@@ -22,7 +23,6 @@ public class ItemsListPresenterImpl implements ItemsListPresenter {
     private ItemsListSorter sorter;
     private BaseSchedulerProvider schedulerProvider;
 
-    @Nullable
     private ItemsListView view;
 
     @Inject
@@ -34,7 +34,7 @@ public class ItemsListPresenterImpl implements ItemsListPresenter {
     }
 
     @Override
-    public void setView(@Nullable ItemsListView view) {
+    public void setView(ItemsListView view) {
         this.view = view;
     }
 
@@ -80,6 +80,7 @@ public class ItemsListPresenterImpl implements ItemsListPresenter {
     public void stop() {
         disposable.clear();
     }
+
 
     @Override
     public List<Item> sortItems(List<Item> items, int option) {

@@ -15,6 +15,4 @@ public class Constants {
             "Champions", "Items", "Runes", "Summoners spells", "Maps"
     };
 
-    public static final String ITEMS_LIST_TAGS = "&tags=depth&tags=effect&tags=from&tags=gold&tags=groups&tags=image&tags=inStore&tags=into&tags=maps&tags=requiredChampion&tags=sanitizedDescription&tags=specialRecipe&tags=stacks&tags=tags&tags=tree";
-
 }

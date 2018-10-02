@@ -6,7 +6,6 @@ import android.util.Log;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Function;
 import io.reactivex.subscribers.DisposableSubscriber;
 import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
 import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
@@ -68,7 +67,7 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
                     @Override
                     public void onComplete() {
-
+                        view.hideLoading();
                     }
                 }));
     }
