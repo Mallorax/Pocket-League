@@ -1,11 +1,12 @@
 package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
 
-import android.support.annotation.Nullable;
+import pl.patrykzygo.pocketleague.base.BasePresenter;
 
-public interface ChampionsListPresenter {
+public interface ChampionsListPresenter extends BasePresenter<ChampionsListView> {
 
-    void setView(@Nullable ChampionsListView view);
+    void setView(ChampionsListView view);
     void showChampions();
+
 
 }

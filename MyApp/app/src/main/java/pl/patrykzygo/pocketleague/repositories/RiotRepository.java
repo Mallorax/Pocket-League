@@ -1,20 +1,21 @@
 package pl.patrykzygo.pocketleague.repositories;
 
 
-import android.content.ClipData;
 
-import java.util.List;
+import io.reactivex.Flowable;
+import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
+import pl.patrykzygo.pocketleague.ViewModels.ItemsViewModel;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
-import rx.Observable;
 
 public interface RiotRepository {
 
-    Observable<List<ChampionDto>> requestChampions();
+    Flowable<ChampionsViewModel> requestChampions();
 
-    Observable<ChampionDto> getChampionById(int id);
+    Flowable<Champion> getChampionByName(String name);
 
-    Observable<List<ItemDto>> getItemsList();
+    Flowable<ItemsViewModel> getItems();
+
+
 
 }

@@ -4,6 +4,7 @@ package pl.patrykzygo.pocketleague.ui.activities.items_list;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +13,9 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
+import android.view.View;
 import android.widget.Toast;
+
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
+import pl.patrykzygo.pocketleague.pojo.Item;
 import pl.patrykzygo.pocketleague.ui.adapters.ItemsListAdapter;
 import pl.patrykzygo.pocketleague.ui.fragments.dialog_fragments.SortDialog;
 
@@ -39,7 +41,7 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
     RecyclerView itemsRecyclerView;
 
     @BindView(R.id.list_activity_progressBar)
-    ProgressBar progressBar;
+    ContentLoadingProgressBar progressBar;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -54,20 +56,31 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-
-        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         presenter.setView(this);
-        presenter.showItems();
-
     }
 
     @Override
-    public void attachItems(List<ItemDto> items) {
-        adapter.setItemsList(items);
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.showItems();
+    }
+
+    @Override
+    public void attachItems(List<Item> item) {
+        itemsRecyclerView.setVisibility(View.VISIBLE);
         adapter.setOnListItemClickListener(this);
-        adapter.notifyDataSetChanged();
+        adapter.setItemsList(item);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        itemsRecyclerView.setLayoutManager(layoutManager);
         itemsRecyclerView.setAdapter(adapter);
-        itemsRecyclerView.addItemDecoration(new DividerItemDecoration(itemsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(itemsRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        itemsRecyclerView.addItemDecoration(itemDecoration);
         itemsRecyclerView.setNestedScrollingEnabled(false);
     }
 
@@ -78,16 +91,17 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
 
     @Override
     public void showLoading() {
-
+        progressBar.show();
     }
 
     @Override
     public void hideLoading() {
-
+        progressBar.hide();
     }
 
+
     @Override
-    public void onListItemClicked(ItemDto item) {
+    public void onListItemClicked(Item item) {
         Toast.makeText(this, "Item id: " + item.getId(), Toast.LENGTH_LONG).show();
     }
 
@@ -103,13 +117,11 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
 
     @Override
     public boolean onQueryTextChange(String query) {
-        adapter.filter(query);
         return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        adapter.filter(query);
         return false;
     }
 
@@ -120,10 +132,6 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
                Toast.makeText(this, "Sort option clicked", Toast.LENGTH_LONG).show();
                SortDialog dialog = new SortDialog();
                dialog.show(getSupportFragmentManager(), "Sort");
-               return true;
-           case R.id.action_filter:
-               Toast.makeText(this, "Filter option clicked", Toast.LENGTH_LONG).show();
-               //TODO  implement action
                return true;
            default:
                return super.onOptionsItemSelected(item);

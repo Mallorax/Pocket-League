@@ -1,12 +1,11 @@
 package pl.patrykzygo.pocketleague.ui.activities.champion;
 
 
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.base.BaseView;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 
-public interface ChampionView {
+public interface ChampionView extends BaseView {
 
-    void setTabs(ChampionDto champion);
-    void showErrorMessage(String message);
-    void showLoading();
-    void hideLoading();
+    void setTabs(Champion champion);
+
 }

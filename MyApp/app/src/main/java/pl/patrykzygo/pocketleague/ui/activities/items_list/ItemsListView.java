@@ -2,12 +2,11 @@ package pl.patrykzygo.pocketleague.ui.activities.items_list;
 
 import java.util.List;
 
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
+import pl.patrykzygo.pocketleague.base.BaseView;
+import pl.patrykzygo.pocketleague.pojo.Item;
 
-public interface ItemsListView {
+public interface ItemsListView extends BaseView {
 
-    void attachItems(List<ItemDto> items);
-    void showErrorMessage(String errorMessage);
-    void showLoading();
-    void hideLoading();
+    void attachItems(List<Item> item);
+
 }

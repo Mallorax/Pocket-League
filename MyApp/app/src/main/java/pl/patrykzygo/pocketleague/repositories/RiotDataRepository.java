@@ -1,81 +1,71 @@
 package pl.patrykzygo.pocketleague.repositories;
 
+import org.reactivestreams.Publisher;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import pl.patrykzygo.pocketleague.ViewModels.ChampionsViewModel;
+import pl.patrykzygo.pocketleague.ViewModels.ItemsViewModel;
+import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.logic.ChampionDataParser;
 import pl.patrykzygo.pocketleague.network.RiotApi;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
-import rx.Observable;
-import rx.schedulers.Schedulers;
+import pl.patrykzygo.pocketleague.pojo.Champion;
+import pl.patrykzygo.pocketleague.pojo.ChampionsResponse;
+import pl.patrykzygo.pocketleague.pojo.Item;
+import pl.patrykzygo.pocketleague.pojo.ItemsResponse;
 
 public class RiotDataRepository implements RiotRepository {
 
 
     private RiotApi riotApi;
     private ChampionDataParser dataParser;
+    private BaseSchedulerProvider provider;
 
     @Inject
-    public RiotDataRepository(RiotApi riotApi, ChampionDataParser dataParser){
+    public RiotDataRepository(RiotApi riotApi, ChampionDataParser dataParser, BaseSchedulerProvider provider ){
         this.riotApi = riotApi;
         this.dataParser = dataParser;
+        this.provider = provider;
     }
 
     @Override
-    public Observable<List<ChampionDto>> requestChampions() {
+    public Flowable<ChampionsViewModel> requestChampions() {
         return riotApi.getChampionsList()
-                .subscribeOn(Schedulers.io())
-                .flatMap(riotResponse -> Observable.just(new ArrayList<>(riotResponse.getData().values())))
-                .flatMap((list) -> {
-                    Collections.sort(list, (p1, p2) -> p1.getName().compareTo(p2.getName()));
-                    for (int i=0; i < list.size(); i++){
-                        try {
-                            list.set(i, dataParser.setChampionIcon(list.get(i)));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    return Observable.just(list);
-                });
+                .flatMap(
+                        (Function<ChampionsResponse, Publisher<ChampionsViewModel>>) championsResponse -> {
+                            List<Champion> champions = new ArrayList<>(championsResponse.getData().values());
+                            return Flowable.just(ChampionsViewModel.succes(champions));
+                        }).subscribeOn(provider.getIOScheduler());
     }
 
     @Override
-    public Observable<ChampionDto> getChampionById(int id) {
-        return riotApi.getChampionById(Integer.toString(id))
-                .subscribeOn(Schedulers.io())
-                .flatMap(championDto -> {
-                    try {
-                        ChampionDto champion = dataParser.parseThroughAll(championDto);
-                        return Observable.just(champion);
-                    }catch (IOException e){
-                        e.printStackTrace();
-                        return null;
-                    }
-                });
+    public Flowable<Champion> getChampionByName(String name) {
+        return riotApi.getChampionByName(name)
+                .flatMap( championsResponse -> {
+                    Map.Entry<String, Champion> championEntry = championsResponse.getData().entrySet().iterator().next();
+                    Champion champion = dataParser.parseThroughAll(championEntry.getValue());
+                    return Flowable.just(champion);
+        }).subscribeOn(provider.getIOScheduler());
     }
 
     @Override
-    public Observable<List<ItemDto>> getItemsList() {
-        return riotApi.getItemsList()
-                .subscribeOn(Schedulers.io())
-                .flatMap(riotResponse -> Observable.just(new ArrayList<>(riotResponse.getData().values())))
-                .flatMap(itemsList -> {
-                    Collections.sort(itemsList, (p1, p2) -> Integer.compare(p1.getGold().getTotal(), p2.getGold().getTotal()));
-                    itemsList.removeIf(itemDto -> itemDto.getGold().getTotal() == 1625 || itemDto.getGold().getTotal() == 1425 || !itemDto.getGold().isPurchasable());
-                    for (int i=0; i < itemsList.size(); i++){
-                        try {
-                            itemsList.set(i, dataParser.setItemIcon(itemsList.get(i)));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    return Observable.just(itemsList);
-                });
+    public Flowable<ItemsViewModel> getItems() {
+        return riotApi.getItems()
+                .flatMap(
+                        (Function<ItemsResponse, Publisher<ItemsViewModel>>) itemsResponse ->{
+                            List<Item> itemsList = new ArrayList<>();
+                            for (Map.Entry<String, Item> itemEntry : itemsResponse.getItemDataMap().entrySet() ){
+                                itemEntry.getValue().setId(itemEntry.getKey());
+                                itemsList.add(itemEntry.getValue());
+                            }
+                            return Flowable.just(ItemsViewModel.succes(itemsList));
+                }).subscribeOn(provider.getIOScheduler());
     }
 }

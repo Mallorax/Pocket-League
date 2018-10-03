@@ -37,8 +37,8 @@ public class StaticInfoFragment extends Fragment implements StaticInfoAdapter.On
 
     @Override
     public void onAttach(Context context) {
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
         super.onAttach(context);
+        ((App) getActivity().getApplication()).getAppComponent().inject(this);
     }
 
     @Override
@@ -51,13 +51,16 @@ public class StaticInfoFragment extends Fragment implements StaticInfoAdapter.On
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.static_info_fragment, container, false);
         ButterKnife.bind(this, view);
+        return view;
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
         adapter.setOnMenuPositionClickLiostener(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-
-        return view;
     }
 
     @Override

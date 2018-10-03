@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
-import pl.patrykzygo.pocketleague.ui.fragments.base_fragments.BaseChampionFragment;
+import pl.patrykzygo.pocketleague.base.BaseChampionFragment;
 import pl.patrykzygo.pocketleague.ui.fragments.lore_fragment.ChampionLoreFragment;
 
 public class ChampionLoreTab extends BaseChampionFragment{

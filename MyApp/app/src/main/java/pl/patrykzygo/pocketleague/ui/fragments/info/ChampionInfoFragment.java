@@ -11,7 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
-import pl.patrykzygo.pocketleague.ui.fragments.base_fragments.BaseChampionFragment;
+import pl.patrykzygo.pocketleague.base.BaseChampionFragment;
 
 public class ChampionInfoFragment extends BaseChampionFragment {
 

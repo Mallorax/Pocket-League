@@ -1,8 +1,11 @@
 package pl.patrykzygo.pocketleague.ui.activities.champions_list;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.patrykzygo.pocketleague.R;
 import pl.patrykzygo.pocketleague.app.App;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionActivity;
 import pl.patrykzygo.pocketleague.ui.adapters.ChampionsListAdapter;
 
@@ -40,13 +43,12 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     RecyclerView championsRecyclerView;
 
     @BindView(R.id.list_activity_progressBar)
-    ProgressBar progressBar;
+    ContentLoadingProgressBar progressBar;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    //TODO user needs to scroll list up into a top to see the search bar, fix that
-
+    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +61,48 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
         setSupportActionBar(toolbar);
 
-        championsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        setupRecyclerViewAndAdapter();
 
-        presenter.setView(this);
-        presenter.showChampions();
     }
 
+    private void setupRecyclerViewAndAdapter(){
+        championsRecyclerView.setVisibility(View.VISIBLE);
+        adapter.setOnChampionClickListener(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        championsRecyclerView.setLayoutManager(layoutManager);
+        championsRecyclerView.setAdapter(adapter);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        championsRecyclerView.addItemDecoration(itemDecoration);
+        championsRecyclerView.setNestedScrollingEnabled(false);
+    }
 
     @Override
-    public void attachChampions(List<ChampionDto> champions) {
+    protected void onStart() {
+        super.onStart();
+        presenter.setView(this);
+        if (query == null) {
+            presenter.showChampions();
+        }else {
+            adapter.getFilter().filter(query);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        championsRecyclerView.setAdapter(null);
+        super.onDestroy();
+    }
+
+    @Override
+    public void attachChampions (List<Champion> champions) {
         adapter.setChampions(champions);
-        adapter.setOnChampionClickListener(this);
-        championsRecyclerView.setAdapter(adapter);
-        championsRecyclerView.addItemDecoration(new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        championsRecyclerView.getAdapter().notifyDataSetChanged();
-        championsRecyclerView.setNestedScrollingEnabled(false);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -82,53 +111,45 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     }
 
     @Override
-    public void onChampionClicked(ChampionDto champion) {
+    public void onChampionClicked(Champion champion) {
         Intent i = new Intent(this, ChampionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("id", champion.getId());
+        bundle.putString("id", champion.getId());
         i.putExtra("bundle", bundle);
         startActivity(i);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.setView(null);
-    }
 
     @Override
     public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.show();
     }
 
     @Override
     public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.hide();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
-
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(this);
         return true;
     }
 
-
-    //TODO don't know if code below should be inside activity, have to check it out
-    //TODO you can't see filtered positions after deleting text, fix that fast
-
     @Override
     public boolean onQueryTextChange(String query) {
-        adapter.filter(query);
-        return true;
+        this.query = query;
+        adapter.getFilter().filter(query);
+        return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        adapter.filter(query);
+        adapter.getFilter().filter(query);
         return false;
     }
 

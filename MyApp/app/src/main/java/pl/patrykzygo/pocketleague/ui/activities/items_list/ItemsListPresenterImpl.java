@@ -7,54 +7,83 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.subscribers.DisposableSubscriber;
+import pl.patrykzygo.pocketleague.ViewModels.ItemsViewModel;
+import pl.patrykzygo.pocketleague.base.BaseView;
+import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.logic.ItemsListSorter;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
+import pl.patrykzygo.pocketleague.pojo.Item;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 public class ItemsListPresenterImpl implements ItemsListPresenter {
 
     private RiotRepository repository;
-    private CompositeSubscription subscription;
+    private CompositeDisposable disposable;
     private ItemsListSorter sorter;
+    private BaseSchedulerProvider schedulerProvider;
 
-    @Nullable
     private ItemsListView view;
 
     @Inject
-    public ItemsListPresenterImpl(RiotRepository repository){
+    public ItemsListPresenterImpl(RiotRepository repository, BaseSchedulerProvider schedulerProvider){
         this.repository = repository;
         this.sorter = new ItemsListSorter();
-        this.subscription = new CompositeSubscription();
+        this.schedulerProvider = schedulerProvider;
+        this.disposable = new CompositeDisposable();
     }
 
     @Override
-    public void setView(@Nullable ItemsListView view) {
+    public void setView(ItemsListView view) {
         this.view = view;
     }
 
     @Override
     public void showItems() {
-        view.showLoading();
         getItems();
-        view.hideLoading();
     }
 
     private void getItems(){
-        subscription.add(repository.getItemsList()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((itemsList) -> {
-                    view.attachItems(itemsList);
-                }, throwable -> {
+        disposable.add(repository.getItems()
+                .observeOn(schedulerProvider.getUiScheduler())
+                .startWith(ItemsViewModel.loading())
+                .onErrorReturn(throwable -> {
                     throwable.printStackTrace();
-                    view.showErrorMessage("Couldn't load items");
+                    return ItemsViewModel.error(throwable.getMessage());
+                    })
+                .subscribeWith(new DisposableSubscriber<ItemsViewModel>(){
+                    @Override
+                    public void onNext(ItemsViewModel itemsViewModel) {
+                        if (itemsViewModel.hasError()){
+                            view.showErrorMessage(itemsViewModel.getErrorMessage());
+                        }else if (itemsViewModel.isLoading()){
+                            view.showLoading();
+                        }else {
+                            List<Item> itemsList = sorter.getListByPriceAsc(itemsViewModel.getItems());
+                            view.attachItems(itemsList);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        view.hideLoading();
+                    }
                 }));
     }
 
     @Override
-    public List<ItemDto> sortItems(List<ItemDto> items, int option) {
+    public void stop() {
+        disposable.clear();
+    }
+
+
+    @Override
+    public List<Item> sortItems(List<Item> items, int option) {
         switch (option){
             case 0:
                 items = sorter.getListByNameAsc(items);

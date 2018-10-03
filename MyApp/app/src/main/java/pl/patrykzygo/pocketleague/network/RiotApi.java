@@ -1,23 +1,23 @@
 package pl.patrykzygo.pocketleague.network;
 
-import pl.patrykzygo.pocketleague.BuildConfig;
-import pl.patrykzygo.pocketleague.pojo.ChampionDto;
-import pl.patrykzygo.pocketleague.pojo.ChampionListDto;
+import io.reactivex.Flowable;
 import pl.patrykzygo.pocketleague.app.Constants;
-import pl.patrykzygo.pocketleague.pojo.ItemListDto;
+import pl.patrykzygo.pocketleague.pojo.ChampionsResponse;
+import pl.patrykzygo.pocketleague.pojo.ItemsResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import rx.Observable;
+
 
 
 public interface RiotApi {
 
-    @GET(Constants.STATIC_DATA + Constants.CHAMPIONS_WITH_IMAGES_REQUEST + "&api_key=" + BuildConfig.RIOT_API_KEY)
-    Observable<ChampionListDto> getChampionsList();
+    @GET(Constants.VERSION + Constants.BASE_STATIC_REQUEST + "champion.json")
+    Flowable<ChampionsResponse> getChampionsList();
 
-    @GET("lol/static-data/v3/champions/{id}?locale=en_US&tags=all&api_key=" +BuildConfig.RIOT_API_KEY)
-    Observable<ChampionDto> getChampionById(@Path("id") String id);
+    @GET(Constants.VERSION + Constants.BASE_STATIC_REQUEST + Constants.SINGLE_CHAMPION_REQUEST + "{name}.json")
+    Flowable<ChampionsResponse> getChampionByName(@Path("name") String name);
 
-    @GET("/lol/static-data/v3/items?locale=en_US" +Constants.ITEMS_LIST_TAGS+ "&api_key=" +BuildConfig.RIOT_API_KEY)
-    Observable<ItemListDto> getItemsList();
+    @GET(Constants.VERSION + Constants.BASE_STATIC_REQUEST + "item.json")
+    Flowable<ItemsResponse> getItems();
+
 }

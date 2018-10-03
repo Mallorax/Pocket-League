@@ -1,19 +1,29 @@
 package pl.patrykzygo.pocketleague.ui.activities.champion;
 
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.subscribers.DisposableSubscriber;
+import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
+import pl.patrykzygo.pocketleague.pojo.Champion;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.subscriptions.CompositeSubscription;
+
 
 public class ChampionPresenterImpl implements ChampionPresenter {
 
     private RiotRepository repository;
-    private CompositeSubscription subscription;
+    private CompositeDisposable disposable;
     private ChampionView view;
+    private BaseSchedulerProvider schedulerProvider;
 
-    public ChampionPresenterImpl(RiotRepository repository){
+    public ChampionPresenterImpl(RiotRepository repository, BaseSchedulerProvider schedulerProvider) {
         this.repository = repository;
-        subscription = new CompositeSubscription();
+        this.schedulerProvider = schedulerProvider;
+        disposable = new CompositeDisposable();
+    }
+
+    @Override
+    public void stop() {
+        disposable.clear();
     }
 
     @Override
@@ -22,20 +32,31 @@ public class ChampionPresenterImpl implements ChampionPresenter {
     }
 
     @Override
-    public void presentChampion(int id) {
+    public void presentChampion(String name) {
         view.showLoading();
-        getChampion(id);
-        view.hideLoading();
+        getChampion(name);
     }
 
-    private void getChampion(int id) {
-        subscription.add(repository.getChampionById(id)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(champion ->{
-            view.setTabs(champion);
-        }, throwable -> {
-            throwable.printStackTrace();
-            view.showErrorMessage("Couldn't load champion");
-        }));
+    private void getChampion(String name) {
+        disposable.add(repository.getChampionByName(name)
+                .observeOn(schedulerProvider.getUiScheduler())
+                .subscribeWith(new DisposableSubscriber<Champion>() {
+                    @Override
+                    public void onNext(Champion champion) {
+                        view.setTabs(champion);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        view.showErrorMessage(t.getMessage());
+                        t.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        view.hideLoading();
+                    }
+                }));
+
     }
 }

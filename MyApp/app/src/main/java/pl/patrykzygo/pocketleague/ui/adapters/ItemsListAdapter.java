@@ -5,28 +5,39 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pl.patrykzygo.pocketleague.R;
-import pl.patrykzygo.pocketleague.pojo.ItemDto;
+import pl.patrykzygo.pocketleague.app.Constants;
+import pl.patrykzygo.pocketleague.pojo.Item;
 
-public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.ItemsListViewHolder> {
+public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.ItemsListViewHolder> implements Filterable {
 
-    private List<ItemDto> itemsList;
-    private List<ItemDto> itemsListCopy;
+    private List<Item> itemsList;
     private OnListItemClickedListener listener;
+    private Picasso picasso;
 
-    public void setItemsList(List<ItemDto> itemsList){
-        this.itemsList = itemsList;
-        this.itemsListCopy = new ArrayList<>();
-        itemsListCopy.addAll(itemsList);
+    public ItemsListAdapter(Picasso picasso){
+        this.picasso = picasso;
     }
 
-    public List<ItemDto> getItemsList(){
+    public void addItem(Item item){
+        itemsList.add(item);
+    }
+
+    public void setItemsList(List<Item> itemsList){
+        this.itemsList = itemsList;
+    }
+
+    public List<Item> getItemsList(){
         return itemsList;
     }
 
@@ -35,19 +46,9 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
 
     }
 
-    public void filter(String text) {
-        itemsList.clear();
-        if(text.isEmpty()){
-            itemsList.addAll(itemsListCopy);
-        } else{
-            text = text.toLowerCase();
-            for(ItemDto champion: itemsListCopy){
-                if(champion.getName().toLowerCase().contains(text)){
-                    itemsList.add(champion);
-                }
-            }
-        }
-        notifyDataSetChanged();
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 
     @Override
@@ -59,10 +60,10 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
 
     @Override
     public void onBindViewHolder(ItemsListViewHolder holder, int position) {
-        ItemDto item = itemsList.get(position);
-        holder.imageView.setImageBitmap(item.getImage().getBitmap());
+        Item item = itemsList.get(position);
         holder.nameView.setText(item.getName());
         holder.priceView.setText(Integer.toString(item.getGold().getTotal()));
+        picasso.load("http://ddragon.leagueoflegends.com/cdn/"+ Constants.VERSION + "/img/item/" +item.getId()+ ".png").into(holder.imageView);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.Item
     }
 
     public interface OnListItemClickedListener {
-        void onListItemClicked(ItemDto item);
+        void onListItemClicked(Item item);
     }
 
     public class ItemsListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

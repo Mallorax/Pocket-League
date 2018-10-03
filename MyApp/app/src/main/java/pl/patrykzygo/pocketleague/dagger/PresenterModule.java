@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.patrykzygo.pocketleague.logic.BaseSchedulerProvider;
 import pl.patrykzygo.pocketleague.repositories.RiotRepository;
 import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionPresenter;
 import pl.patrykzygo.pocketleague.ui.activities.champion.ChampionPresenterImpl;
@@ -17,19 +18,19 @@ public class PresenterModule {
 
     @Provides
     @Singleton
-    ChampionsListPresenter provideChampionsListPresenter(RiotRepository repository){
-        return new ChampionsListImpl(repository);
+    ChampionsListPresenter provideChampionsListPresenter(RiotRepository repository, BaseSchedulerProvider schedulerProvider){
+        return new ChampionsListImpl(repository, schedulerProvider);
     }
 
     @Provides
     @Singleton
-    ChampionPresenter providesChampionPresenter(RiotRepository repository){
-        return new ChampionPresenterImpl(repository);
+    ChampionPresenter providesChampionPresenter(RiotRepository repository, BaseSchedulerProvider schedulerProvider){
+        return new ChampionPresenterImpl(repository, schedulerProvider);
     }
 
     @Provides
     @Singleton
-    ItemsListPresenter providesItemsListPresenter (RiotRepository repository){
-        return  new ItemsListPresenterImpl(repository);
+    ItemsListPresenter providesItemsListPresenter (RiotRepository repository, BaseSchedulerProvider schedulerProvider){
+        return  new ItemsListPresenterImpl(repository, schedulerProvider);
     }
 }
