@@ -11,8 +11,5 @@
         android:title="@string/menu_sort"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/action_filter"
-        android:title="@string/menu_filter"
-        app:showAsAction="never"/>
 
 </menu>

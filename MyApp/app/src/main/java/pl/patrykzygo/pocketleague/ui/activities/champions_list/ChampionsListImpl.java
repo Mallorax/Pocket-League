@@ -40,6 +40,7 @@ public class ChampionsListImpl implements ChampionsListPresenter {
     @Override
     public void stop() {
         disposable.clear();
+        view = null;
     }
 
     private void getChampions() {

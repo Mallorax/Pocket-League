@@ -48,6 +48,8 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    private String query;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +61,17 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
         setSupportActionBar(toolbar);
 
-        presenter.setView(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.showChampions();
+        presenter.setView(this);
+        if (query == null) {
+            presenter.showChampions();
+        }else {
+            adapter.getFilter().filter(query);
+        }
     }
 
     @Override
@@ -106,7 +112,6 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     @Override
     public void showLoading() {
         progressBar.show();
-        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -124,9 +129,9 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
         return true;
     }
 
-
     @Override
     public boolean onQueryTextChange(String query) {
+        this.query = query;
         adapter.getFilter().filter(query);
         return false;
     }

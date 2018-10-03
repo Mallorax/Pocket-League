@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -133,10 +132,6 @@ public class ItemsListActivity extends AppCompatActivity implements ItemsListVie
                Toast.makeText(this, "Sort option clicked", Toast.LENGTH_LONG).show();
                SortDialog dialog = new SortDialog();
                dialog.show(getSupportFragmentManager(), "Sort");
-               return true;
-           case R.id.action_filter:
-               Toast.makeText(this, "Filter option clicked", Toast.LENGTH_LONG).show();
-               //TODO  implement action
                return true;
            default:
                return super.onOptionsItemSelected(item);
