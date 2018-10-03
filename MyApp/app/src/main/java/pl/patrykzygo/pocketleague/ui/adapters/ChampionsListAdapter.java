@@ -36,13 +36,6 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
         this.champions = new ArrayList<>();
         this.filteredChampions = new ArrayList<>();
     }
-    public List<Champion> getFilteredChampions(){
-        return filteredChampions;
-    }
-
-    public boolean hasChampions(){
-        return !filteredChampions.isEmpty();
-    }
 
     public void setOnChampionClickListener(OnChampionClickListener championClickListener) {
         this.onChampionClickListener = championClickListener;

@@ -61,6 +61,19 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
         setSupportActionBar(toolbar);
 
+        setupRecyclerViewAndAdapter();
+
+    }
+
+    private void setupRecyclerViewAndAdapter(){
+        championsRecyclerView.setVisibility(View.VISIBLE);
+        adapter.setOnChampionClickListener(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        championsRecyclerView.setLayoutManager(layoutManager);
+        championsRecyclerView.setAdapter(adapter);
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        championsRecyclerView.addItemDecoration(itemDecoration);
+        championsRecyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -82,22 +95,14 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         championsRecyclerView.setAdapter(null);
+        super.onDestroy();
     }
 
     @Override
     public void attachChampions (List<Champion> champions) {
-        championsRecyclerView.setVisibility(View.VISIBLE);
-        adapter.setOnChampionClickListener(this);
         adapter.setChampions(champions);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        championsRecyclerView.setLayoutManager(layoutManager);
-        championsRecyclerView.setAdapter(adapter);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(championsRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        championsRecyclerView.addItemDecoration(itemDecoration);
-        championsRecyclerView.setNestedScrollingEnabled(false);
-
+        adapter.notifyDataSetChanged();
     }
 
     @Override
