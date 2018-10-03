@@ -81,6 +81,12 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        championsRecyclerView.setAdapter(null);
+    }
+
+    @Override
     public void attachChampions (List<Champion> champions) {
         championsRecyclerView.setVisibility(View.VISIBLE);
         adapter.setOnChampionClickListener(this);
