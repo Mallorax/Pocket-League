@@ -47,10 +47,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    //TODO user needs to scroll list up into a top to see the search bar, fix that
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

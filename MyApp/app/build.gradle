@@ -53,11 +53,11 @@ android {
             implementation 'com.jakewharton:butterknife:8.8.1'
             annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
             // Dagger
-            implementation 'com.google.dagger:dagger:2.11'
-            implementation 'com.google.dagger:dagger-android:2.11'
-            implementation 'com.google.dagger:dagger-android-support:2.11'
-            annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
-            annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+            implementation 'com.google.dagger:dagger:2.15'
+            implementation 'com.google.dagger:dagger-android:2.15'
+            implementation 'com.google.dagger:dagger-android-support:2.15'
+            annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
+            annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
             //Picasso
             implementation 'com.squareup.picasso:picasso:2.5.2'
             // Leak canary
