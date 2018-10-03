@@ -47,7 +47,7 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +79,6 @@ public class ChampionsListActivity extends AppCompatActivity implements Champion
         championsRecyclerView.setVisibility(View.VISIBLE);
         adapter.setOnChampionClickListener(this);
         adapter.setChampions(champions);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         championsRecyclerView.setLayoutManager(layoutManager);
         championsRecyclerView.setAdapter(adapter);

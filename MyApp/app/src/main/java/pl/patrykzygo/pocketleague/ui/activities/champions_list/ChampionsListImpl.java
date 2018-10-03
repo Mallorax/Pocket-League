@@ -14,7 +14,6 @@ import pl.patrykzygo.pocketleague.repositories.RiotRepository;
 
 public class ChampionsListImpl implements ChampionsListPresenter {
 
-
     private ChampionsListView view;
     private RiotRepository riotRepository;
     private CompositeDisposable disposable;
@@ -74,5 +73,4 @@ public class ChampionsListImpl implements ChampionsListPresenter {
 
 }
 //TODO presenterImpl leaks view(activity) instance, have to fix that
-//TODO 2 handle the progress bar
 
