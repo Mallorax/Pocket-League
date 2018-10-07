@@ -38,8 +38,7 @@ public class RiotDataRepository implements RiotRepository {
     @Override
     public Flowable<ChampionsViewModel> requestChampions() {
         return riotApi.getChampionsList()
-                .flatMap(
-                        (Function<ChampionsResponse, Publisher<ChampionsViewModel>>) championsResponse -> {
+                .flatMap(championsResponse -> {
                             List<Champion> champions = new ArrayList<>(championsResponse.getData().values());
                             return Flowable.just(ChampionsViewModel.succes(champions));
                         }).subscribeOn(provider.getIOScheduler());
@@ -48,7 +47,7 @@ public class RiotDataRepository implements RiotRepository {
     @Override
     public Flowable<Champion> getChampionByName(String name) {
         return riotApi.getChampionByName(name)
-                .flatMap( championsResponse -> {
+                .flatMap(championsResponse -> {
                     Map.Entry<String, Champion> championEntry = championsResponse.getData().entrySet().iterator().next();
                     Champion champion = dataParser.parseThroughAll(championEntry.getValue());
                     return Flowable.just(champion);
@@ -58,8 +57,7 @@ public class RiotDataRepository implements RiotRepository {
     @Override
     public Flowable<ItemsViewModel> getItems() {
         return riotApi.getItems()
-                .flatMap(
-                        (Function<ItemsResponse, Publisher<ItemsViewModel>>) itemsResponse ->{
+                .flatMap(itemsResponse ->{
                             List<Item> itemsList = new ArrayList<>();
                             for (Map.Entry<String, Item> itemEntry : itemsResponse.getItemDataMap().entrySet() ){
                                 itemEntry.getValue().setId(itemEntry.getKey());
